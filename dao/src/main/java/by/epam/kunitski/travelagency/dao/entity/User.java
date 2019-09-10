@@ -2,6 +2,7 @@ package by.epam.kunitski.travelagency.dao.entity;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,10 +13,11 @@ import javax.validation.constraints.Size;
 public class User {
 
     @Id
-    private Integer id;
+    private String id;
 
     @Size(min = 3, max = 20)
-    private String login;
+    @Indexed(unique=true)
+    private String username;
 
     //    @Size(min = 3, max = 20)
     @NotNull

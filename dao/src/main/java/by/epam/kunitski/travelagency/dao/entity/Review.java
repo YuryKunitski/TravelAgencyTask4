@@ -2,6 +2,7 @@ package by.epam.kunitski.travelagency.dao.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 public class Review {
 
     @Id
-    private Integer id;
+    private String id;
 
     @PastOrPresent
     private LocalDate date;
@@ -23,8 +24,10 @@ public class Review {
     private String text;
 
     @NotNull
+    @DBRef
     private User user;
 
     @NotNull
+    @DBRef
     private Tour tour;
 }

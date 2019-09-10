@@ -3,6 +3,7 @@ package by.epam.kunitski.travelagency.dao.entity;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Positive;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 public class Tour {
 
     @Id
-    private Integer id;
+    private String id;
 
     private String photo;
 
@@ -30,8 +31,10 @@ public class Tour {
     @Positive
     private Double cost;
 
+    @DBRef
     private Hotel hotel;
 
+    @DBRef
     private Country country;
 
 //    @Enumerated(EnumType.STRING)

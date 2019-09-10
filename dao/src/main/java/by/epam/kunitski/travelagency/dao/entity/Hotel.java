@@ -4,15 +4,18 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+
 import javax.validation.constraints.NotNull;
 
 @Data
 public class Hotel {
 
     @Id
-    private Integer id;
+    private String id;
 
     @NotNull
+    @Indexed(unique=true)
     private String name;
 
     @Range(min = 1, max = 5)

@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE")
+    }
+}
+
 plugins {
     id "io.spring.dependency-management" version "1.0.8.RELEASE"
 }
@@ -14,48 +23,24 @@ subprojects {
     apply plugin: 'idea'
 
     repositories {
-
         mavenCentral()
     }
 
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.7.RELEASE")
+            mavenBom("org.springframework.boot:spring-boot-dependencies:2.1.8.RELEASE")
         }
     }
 
     dependencies {
-        compile('org.springframework.boot:spring-boot-starter-test')
-
-        compile("org.springframework.boot:spring-boot-starter-data-mongodb")
         implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+        testImplementation 'org.springframework.security:spring-security-test'
         compile 'org.projectlombok:lombok:1.18.8'
-
+        annotationProcessor 'org.projectlombok:lombok:1.18.8'
     }
 
 }
-
-//
-//allprojects {
-//    repositories {
-//        // Use jcenter for resolving dependencies.
-//        // You can declare any Maven/Ivy/file repository here.
-//        mavenCentral()
-//    }
-//}
-//
-//subprojects {
-//    apply plugin: 'java'
-//
-//    dependencies {
-//        testImplementation 'junit:junit:4.12'
-//    }
-//}
-
-//dependencies {
-//    // This dependency is used by the application.
-//    implementation 'com.google.guava:guava:28.0-jre'
-//
-//    // Use JUnit test framework
-//    testImplementation 'junit:junit:4.12'
-//}
