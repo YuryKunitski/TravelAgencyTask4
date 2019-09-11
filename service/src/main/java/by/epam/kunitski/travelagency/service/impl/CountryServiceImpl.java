@@ -23,16 +23,14 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country update(Country country, String id) throws EntityNotFoundException {
-        Optional<Country> optionalCountry = countryDAO.findById(id);
 
-        if (optionalCountry.isEmpty()){
-            throw new EntityNotFoundException();
+        if (!countryDAO.existsById(id)) {
+            throw new EntityNotFoundException("Couldn't find " + Country.class.getSimpleName() + " with id=" + id);
         }
 
-        Country countryUpdate = countryDAO.findById(id).get();
-        countryUpdate.setName(country.getName());
+        country.setId(id);
 
-        return countryUpdate;
+        return countryDAO.save(country);
     }
 
     @Override

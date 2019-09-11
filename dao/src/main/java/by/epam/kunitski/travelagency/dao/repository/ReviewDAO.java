@@ -9,7 +9,7 @@ import java.util.List;
 public interface ReviewDAO extends MongoRepository<Review, String> {
 
     @Query("{'tour.id': ?0}")
-    List<Review> getAllreviewByTourId(int tourId);
+    List<Review> getAllByTourId(int tourId);
 
     @Query("{'user.id': ?0}")
     List<Review> getAllByUserId(int userId);
