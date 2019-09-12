@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Positive;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 
 
 @Data
+@Document
 public class Tour {
 
     @Id

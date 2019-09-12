@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface TourService extends EntityService<Tour> {
 
-    List<Tour> getAllByUserId(int userId);
+    List<Tour> getAllByUserId(String userId);
 }

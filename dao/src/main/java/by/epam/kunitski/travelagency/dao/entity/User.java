@@ -3,6 +3,7 @@ package by.epam.kunitski.travelagency.dao.entity;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -10,6 +11,7 @@ import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Document
 public class User {
 
     @Id
@@ -23,7 +25,7 @@ public class User {
     @NotNull
     private String password;
 
-//    @NotNull
+    //    @NotNull
 //    @Enumerated(EnumType.STRING)
 //    @Type( type = "pgsql_enum" )
     private UserRole role;

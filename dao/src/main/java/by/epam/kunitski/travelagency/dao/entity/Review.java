@@ -3,6 +3,7 @@ package by.epam.kunitski.travelagency.dao.entity;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Data
+@Document
 public class Review {
 
     @Id

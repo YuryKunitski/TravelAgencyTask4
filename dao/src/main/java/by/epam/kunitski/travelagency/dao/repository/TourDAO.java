@@ -9,5 +9,5 @@ import java.util.List;
 public interface TourDAO extends MongoRepository<Tour, String> {
 
     @Query("{'user.id': ?0}")
-    List<Tour> getAllByUserId(int userId);
+    List<Tour> getAllByUserId(String userId);
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ReviewService extends EntityService<Review> {
 
-    List<Review> getAllByTourId(int tourId);
+    List<Review> getAllByTourId(String tourId);
 
-    List<Review> getAllByUserId(int userId);
+    List<Review> getAllByUserId(String userId);
 }

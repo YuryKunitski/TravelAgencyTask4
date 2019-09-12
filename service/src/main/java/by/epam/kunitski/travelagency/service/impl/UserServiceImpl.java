@@ -5,10 +5,12 @@ import by.epam.kunitski.travelagency.dao.repository.UserDAO;
 import by.epam.kunitski.travelagency.service.UserService;
 import by.epam.kunitski.travelagency.service.exeption.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -16,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByUsername(String username) {
-        return userDAO.findUserByUsername(username);
+        return userDAO.findByUsername(username);
     }
 
     @Override

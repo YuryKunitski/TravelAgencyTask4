@@ -17,12 +17,12 @@ public class ReviewServiceImpl implements ReviewService {
     private ReviewDAO reviewDAO;
 
     @Override
-    public List<Review> getAllByTourId(int tourId) {
+    public List<Review> getAllByTourId(String tourId) {
         return reviewDAO.getAllByTourId(tourId);
     }
 
     @Override
-    public List<Review> getAllByUserId(int userId) {
+    public List<Review> getAllByUserId(String userId) {
         return reviewDAO.getAllByUserId(userId);
     }
 
