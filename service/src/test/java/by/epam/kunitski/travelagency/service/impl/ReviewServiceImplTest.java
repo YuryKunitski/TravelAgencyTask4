@@ -1,16 +1,12 @@
 package by.epam.kunitski.travelagency.service.impl;
 
 import by.epam.kunitski.travelagency.dao.entity.*;
-import by.epam.kunitski.travelagency.dao.repository.CountryDAO;
 import by.epam.kunitski.travelagency.dao.repository.ReviewDAO;
-import by.epam.kunitski.travelagency.service.CountryService;
 import by.epam.kunitski.travelagency.service.ReviewService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -22,7 +18,6 @@ import java.util.ArrayList;
 import static by.epam.kunitski.travelagency.dao.entity.Hotel.FeatureType.CHILDREN_AREA;
 import static by.epam.kunitski.travelagency.dao.entity.Tour.TourType.ECONOM;
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ReviewServiceImpl.class)
@@ -85,6 +80,7 @@ public class ReviewServiceImplTest {
 
         reviewService.getAllByTourId("1");
         verify(reviewDAO, times(1)).getAllByTourId("1");
+        verifyNoMoreInteractions(reviewDAO);
     }
 
     @Test
@@ -93,5 +89,6 @@ public class ReviewServiceImplTest {
 
         reviewService.getAllByUserId("1");
         verify(reviewDAO, times(1)).getAllByUserId("1");
+        verifyNoMoreInteractions(reviewDAO);
     }
 }
