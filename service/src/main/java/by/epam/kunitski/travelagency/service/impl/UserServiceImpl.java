@@ -40,16 +40,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAll() {
-        return null;
+        return userDAO.findAll();
     }
 
     @Override
     public Optional<User> getById(String id) {
-        return Optional.empty();
+        return userDAO.findById(id);
     }
 
     @Override
     public void delete(String id) {
-
+        userDAO.deleteById(id);
     }
 }
