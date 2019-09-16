@@ -41,14 +41,13 @@ public class UserController {
         return ResponseEntity.ok(userService.addAdmin(user));
     }
 
-    @Secured("ROLE_ADMIN")
     @GetMapping("/get_by_id")
     public ResponseEntity<User> getUserById(@RequestParam String id) {
 
         return ResponseEntity.ok(userService.getById(id).orElseThrow());
     }
 
-    @Secured("ROLE_ADMIN")
+   
     @GetMapping("/get_by_username")
     public ResponseEntity<User> getUserByUsername(@RequestParam String username) {
 

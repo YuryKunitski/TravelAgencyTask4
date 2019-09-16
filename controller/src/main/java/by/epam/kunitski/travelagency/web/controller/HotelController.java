@@ -33,7 +33,7 @@ public class HotelController {
         return ResponseEntity.ok(hotelService.getById(id).orElseThrow());
     }
 
-    @GetMapping("get_all")
+    @GetMapping("/get_all")
     public ResponseEntity<List<Hotel>> getAllHotel() {
 
         return ResponseEntity.ok(hotelService.getAll());

@@ -38,15 +38,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .anonymous().disable()
-                .authorizeRequests()
-                .antMatchers("/api-docs/**").permitAll();
+        http.authorizeRequests()
+                .antMatchers("/review/**", "/country/get_by_id", "/country/get_all",
+                        "/hotel/get_by_id", "/hotel/get_all", "/tour/get_by_id", "/tour/get_all").permitAll()
+                .and()
+                .authorizeRequests().anyRequest().authenticated()
+                .and();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
