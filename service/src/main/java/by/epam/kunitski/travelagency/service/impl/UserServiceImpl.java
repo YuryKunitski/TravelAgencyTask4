@@ -28,7 +28,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User add(User user) {
+
+        user.setRole(User.UserRole.MEMBER);
+
         return userDAO.save(user);
+    }
+
+    @Override
+    public User addAdmin(User userAdmin) {
+
+        userAdmin.setRole(User.UserRole.ADMIN);
+
+        return userDAO.save(userAdmin);
     }
 
     @Override

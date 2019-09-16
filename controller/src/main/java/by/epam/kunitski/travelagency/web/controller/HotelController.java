@@ -7,6 +7,7 @@ import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
+    @Secured("ROLE_ADMIN")
     @PostMapping
     public ResponseEntity<Hotel> addHotel(@Valid @RequestBody Hotel hotel) {
 
@@ -37,6 +39,7 @@ public class HotelController {
         return ResponseEntity.ok(hotelService.getAll());
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping
     public ResponseEntity<Hotel> updateHotel(@Valid @RequestBody Hotel hotel,
                                                  @RequestParam String id) throws EntityNotFoundException {
@@ -44,6 +47,7 @@ public class HotelController {
         return ResponseEntity.ok(hotelService.update(hotel, id));
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping
     public ResponseEntity<?> deleteHotel(@RequestParam String id){
 

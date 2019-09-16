@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     static final String CLIENT_ID = "client-id";
-    static final String CLIENT_SECRET = "client-secret";
+    static final String CLIENT_SECRET = "$2a$04$uNfK7J1JV8524pLe8x3UO.BHgrpuQ11piziryfVB2FxMAFoBkYviC";  //client-secret
     static final String GRANT_TYPE_PASSWORD = "password";
     static final String AUTHORIZATION_CODE = "authorization_code";
     static final String REFRESH_TOKEN = "refresh_token";
@@ -50,8 +50,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .inMemory()
                 .withClient(CLIENT_ID)
                 .secret(CLIENT_SECRET)
-                .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT )
-                .scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
+                .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT)
+                .scopes(SCOPE_READ)
                 .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS).
                 refreshTokenValiditySeconds(FREFRESH_TOKEN_VALIDITY_SECONDS);
     }

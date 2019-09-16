@@ -6,9 +6,11 @@ import by.epam.kunitski.travelagency.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.mockito.Mockito.*;
@@ -24,6 +26,9 @@ public class UserServiceImplTest {
 	@MockBean
 	private UserDAO userDAO;
 
+//	@MockBean
+//	private PasswordEncoder passwordEncoder;
+
 	User user = new User();
 
 	@Before
@@ -38,6 +43,7 @@ public class UserServiceImplTest {
 		when(userDAO.findByUsername("Saundra")).thenReturn(user);
 
 		userService.findUserByUsername("Saundra");
+
 		verify(userDAO, times(1)).findByUsername("Saundra");
 		verifyNoMoreInteractions(userDAO);
 	}

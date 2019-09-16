@@ -5,4 +5,6 @@ import by.epam.kunitski.travelagency.dao.entity.User;
 public interface UserService extends EntityService<User> {
 
     User findUserByUsername(String username);
+
+    User addAdmin(User userAdmin);
 }

@@ -7,6 +7,7 @@ import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ public class TourController {
     @Autowired
     private TourService tourService;
 
+    @Secured("ROLE_ADMIN")
     @PostMapping
     public ResponseEntity<Tour> addTour(@Valid @RequestBody Tour tour) {
 
@@ -43,6 +45,7 @@ public class TourController {
         return ResponseEntity.ok(tourService.getAllByUserId(id));
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping
     public ResponseEntity<Tour> updateTour(@Valid @RequestBody Tour tour,
                                                  @RequestParam String id) throws EntityNotFoundException {
@@ -50,6 +53,7 @@ public class TourController {
         return ResponseEntity.ok(tourService.update(tour, id));
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping
     public ResponseEntity<?> deleteTour(@RequestParam String id){
 

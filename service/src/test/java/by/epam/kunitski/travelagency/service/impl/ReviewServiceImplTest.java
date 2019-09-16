@@ -79,6 +79,7 @@ public class ReviewServiceImplTest {
         when(reviewDAO.getAllByTourId("1")).thenReturn(new ArrayList<>());
 
         reviewService.getAllByTourId("1");
+
         verify(reviewDAO, times(1)).getAllByTourId("1");
         verifyNoMoreInteractions(reviewDAO);
     }
@@ -88,6 +89,7 @@ public class ReviewServiceImplTest {
         Mockito.when(reviewDAO.getAllByUserId("1")).thenReturn(new ArrayList<>());
 
         reviewService.getAllByUserId("1");
+
         verify(reviewDAO, times(1)).getAllByUserId("1");
         verifyNoMoreInteractions(reviewDAO);
     }

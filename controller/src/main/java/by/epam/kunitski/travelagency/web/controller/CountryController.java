@@ -7,6 +7,7 @@ import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ public class CountryController {
     @Autowired
     private CountryService countryService;
 
+    @Secured("ROLE_ADMIN")
     @PostMapping
     public ResponseEntity<Country> addCountry(@Valid @RequestBody Country country) {
 
@@ -37,6 +39,7 @@ public class CountryController {
         return ResponseEntity.ok(countryService.getAll());
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping
     public ResponseEntity<Country> updateCountry(@Valid @RequestBody Country country,
                                  @RequestParam String id) throws EntityNotFoundException{
@@ -44,6 +47,7 @@ public class CountryController {
         return ResponseEntity.ok(countryService.update(country, id));
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping
     public ResponseEntity<?> deleteCountry(@RequestParam String id){
 
