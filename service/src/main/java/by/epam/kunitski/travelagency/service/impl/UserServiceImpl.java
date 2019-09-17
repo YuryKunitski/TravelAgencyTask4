@@ -5,18 +5,13 @@ import by.epam.kunitski.travelagency.dao.repository.UserDAO;
 import by.epam.kunitski.travelagency.service.UserService;
 import by.epam.kunitski.travelagency.service.exeption.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDAO userDAO;
@@ -68,19 +63,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void delete(String id) {
         userDAO.deleteById(id);
     }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDAO.findByUsername(username);
-        if (user == null){
-            throw  new UsernameNotFoundException("Invalid username or password");
-        }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
-    }
-
-    private List getAuthority() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
-    }
-
 
 }

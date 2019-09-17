@@ -1,4 +1,4 @@
-package by.epam.kunitski.travelagency.web.app;
+package by.epam.kunitski.travelagency.web;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 
-@SpringBootApplication(scanBasePackages = { "by.epam.kunitski.travelagency" } )
+@SpringBootApplication
 @EnableMongoRepositories("by.epam.kunitski.travelagency.dao.repository")
 public class Application implements CommandLineRunner {
 
