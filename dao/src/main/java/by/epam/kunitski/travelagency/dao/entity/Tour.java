@@ -1,5 +1,6 @@
 package by.epam.kunitski.travelagency.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
@@ -22,6 +23,7 @@ public class Tour {
     private String photo;
 
     @FutureOrPresent
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate date;
 
     @Range(min = 1, max = 99)
