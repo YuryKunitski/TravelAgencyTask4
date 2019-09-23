@@ -2,6 +2,8 @@ package by.epam.kunitski.travelagency.dao.repository;
 
 import by.epam.kunitski.travelagency.dao.entity.Tour;
 import by.epam.kunitski.travelagency.dao.searchform.TourForm;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.time.LocalDate;
@@ -36,9 +38,30 @@ public abstract class TourDAOCriteria implements TourDAO {
 
     @Override
     public List<Tour> findToursByCriteria(TourForm tourForm) {
-        List<Query> list = new ArrayList<>();
+        List<Query> listQuery = new ArrayList<>();
 
-        Query query = new Query();
+        Query queryCost = new Query();
+        queryCost.addCriteria(Criteria.where("cost").lt(tourForm.getMaxCost()).gt(tourForm.getMinCost()));
+        listQuery.add(queryCost);
+
+        Query queryStars = new Query();
+        queryStars.addCriteria(Criteria.where("stars").lt(tourForm.getMaxStars()).gt(tourForm.getMinStars()));
+        listQuery.add(queryStars);
+
+        Query queryDuration = new Query();
+        queryDuration.addCriteria(Criteria.where("duration").lt(tourForm.getMaxDuration()).gt(tourForm.getMinDuration()));
+        listQuery.add(queryDuration);
+
+
+
+
+        Query queryTourType = new Query();
+        queryTourType.addCriteria(Criteria.where("tour_type").is(tourForm.getTourType()));
+        listQuery.add(queryTourType);
+
+        Query querySort = new Query();
+        querySort.with(new Sort(Sort.Direction.DESC, "date"));
+        listQuery.add(querySort);
 
         return null;
     }
