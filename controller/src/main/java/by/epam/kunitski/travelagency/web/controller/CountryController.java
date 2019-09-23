@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/country")
 public class CountryController {
@@ -41,17 +42,17 @@ public class CountryController {
 
     @Secured("ROLE_ADMIN")
     @PutMapping
-    public ResponseEntity<Country> updateCountry(@Valid @RequestBody Country country,
-                                 @RequestParam String id) throws EntityNotFoundException{
+    public ResponseEntity<Country> updateCountry(@RequestParam String id,
+                                                 @Valid @RequestBody Country country) throws EntityNotFoundException {
 
         return ResponseEntity.ok(countryService.update(country, id));
     }
 
     @Secured("ROLE_ADMIN")
     @DeleteMapping
-    public ResponseEntity<?> deleteCountry(@RequestParam String id){
+    public ResponseEntity<?> deleteCountry(@RequestParam String id) {
 
-        if (countryService.getById(id).isEmpty()){
+        if (countryService.getById(id).isEmpty()) {
             return new ResponseEntity<Error>(HttpStatus.BAD_REQUEST);
         }
 

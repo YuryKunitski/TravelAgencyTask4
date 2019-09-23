@@ -12,7 +12,6 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
-
 @Data
 @Document
 public class Tour {

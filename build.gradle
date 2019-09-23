@@ -50,7 +50,6 @@ subprojects {
         compile 'org.projectlombok:lombok:1.18.8'
         annotationProcessor 'org.projectlombok:lombok:1.18.8'
 
-
         compile "io.springfox:springfox-swagger2:2.9.2"
         compile "io.springfox:springfox-swagger-ui:2.9.2"
 
