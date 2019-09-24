@@ -1,6 +1,7 @@
 package by.epam.kunitski.travelagency.web.controller;
 
 import by.epam.kunitski.travelagency.dao.entity.Tour;
+import by.epam.kunitski.travelagency.dao.searchform.TourForm;
 import by.epam.kunitski.travelagency.service.TourService;
 import by.epam.kunitski.travelagency.service.exeption.EntityNotFoundException;
 import com.sun.net.httpserver.Authenticator;
@@ -38,6 +39,12 @@ public class TourController {
     public ResponseEntity<List<Tour>> getAllTour() {
 
         return ResponseEntity.ok(tourService.getAll());
+    }
+
+    @GetMapping("get_all_by_criteria")
+    public ResponseEntity<List<Tour>> getAllTourByCriteria(@Valid @ModelAttribute("tourSearchForm") TourForm tourForm) {
+
+        return ResponseEntity.ok(tourService.getAllByCriteria(tourForm));
     }
 
     @GetMapping("get_all_by_user_id")

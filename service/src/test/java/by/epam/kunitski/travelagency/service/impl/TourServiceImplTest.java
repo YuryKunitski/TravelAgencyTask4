@@ -3,6 +3,7 @@ package by.epam.kunitski.travelagency.service.impl;
 import by.epam.kunitski.travelagency.dao.entity.Country;
 import by.epam.kunitski.travelagency.dao.entity.Hotel;
 import by.epam.kunitski.travelagency.dao.entity.Tour;
+import by.epam.kunitski.travelagency.dao.repository.DAOTourCriteria;
 import by.epam.kunitski.travelagency.dao.repository.TourDAO;
 import by.epam.kunitski.travelagency.service.TourService;
 import org.junit.Before;
@@ -29,6 +30,10 @@ public class TourServiceImplTest {
 
     @MockBean
     private TourDAO tourDAO;
+
+    @MockBean
+    private DAOTourCriteria daoTourCriteria;
+
 
     Tour tour = new Tour();
 
