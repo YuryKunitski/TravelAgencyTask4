@@ -8,11 +8,19 @@ import { CountryComponent } from './country/country.component';
 import { FormsModule } from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import { CountryService } from './country/country.service';
+import { UserComponent } from './user/user.component';
+import { HotelComponent } from './hotel/hotel.component';
+import { HeaderComponent } from './nav/header/header.component';
+import { FooterComponent } from './nav/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CountryComponent
+    CountryComponent,
+    UserComponent,
+    HotelComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

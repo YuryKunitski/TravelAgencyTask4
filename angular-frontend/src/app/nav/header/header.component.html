@@ -1,0 +1,60 @@
+<div class="uui-header">
+    <nav>
+        <a href="search_tours" class="brand-logo">
+            <span class="logo">
+                <img src="uui/images/ic_logo_UUi.svg" alt=""/>
+            </span>
+            Travel Agency
+        </a>
+        <ul class="uui-header-tools nav navbar-nav">
+            <li class="dropdown uui-profile-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span sec:authorize="isAuthenticated()" class="uui-promo-heading brand-logo"
+                          sec:authentication="name"></span>
+
+                    <div class="profile-photo">
+                        <img src="uui/images/icons/no_photo.png" alt=""/>
+                    </div>
+                </a>
+                <div class="dropdown-menu" role="menu">
+                    <span class="menu-arrow"></span>
+                    <ul class="profile-links">
+                        <li sec:authorize="!isAuthenticated()" class="login"><a href="login"><i
+                                class="fa fa-sign-in"></i><span th:text="#{msg.log_in}"/></a></li>
+                        <li sec:authorize="!isAuthenticated()" class="login"><a href="registration"><i
+                                class="fa fa-lightbulb-o"></i><span th:text="#{msg.register}"/></a></li>
+                        <li sec:authorize="isAuthenticated()" class="logout"><a href="logout"><i
+                                class="fa fa-sign-out"></i><span th:text="#{msg.log_out}"/></a></li>
+                        <li sec:authorize="hasRole('ADMIN')" class="login"><a th:href="profile_admin"><i
+                                class="fa fa-user"></i><span th:text="#{msg.profile}"/></a></li>
+                        <li sec:authorize="hasRole('MEMBER')" class="login">
+                            <a th:href="@{/profile_member(user_name=${#authentication.getPrincipal().getUsername()})}">
+                                <i class="fa fa-user"></i><span th:text="#{msg.profile}"/></a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="uui-dropdown-button for_header_btn">
+        <button type="button" class="uui-button dropdown-toggle" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+            <span th:text="#{msg.language}"/>
+            <i class="fa fa-angle-down"></i>
+        </button>
+        <ul class="dropdown-menu">
+
+            <li th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+                <a th:href="@{${urlBuilder.replaceQueryParam('lang', 'en').toUriString()}}">
+                    <span th:text="#{msg.english}"/> </a>
+            </li>
+            <li th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+                <a th:href="@{${urlBuilder.replaceQueryParam('lang', 'ru').toUriString()}}">
+                    <span th:text="#{msg.russian}"/> </a>
+            </li>
+        </ul>
+    </div>
+
+    <a href="search_tours" class="uui-button for_header_btn"><span th:text="#{msg.home}"/></a>
+
+</div>
