@@ -5,7 +5,7 @@ import by.epam.kunitski.travelagency.dao.searchform.TourForm;
 
 import java.util.List;
 
-public interface DAOTourCriteria {
+public interface TourDAOCustom {
 
     List<Tour> findToursByCriteria(TourForm tourForm);
 }

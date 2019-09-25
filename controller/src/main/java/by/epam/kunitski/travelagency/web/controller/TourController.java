@@ -42,7 +42,7 @@ public class TourController {
     }
 
     @GetMapping("get_all_by_criteria")
-    public ResponseEntity<List<Tour>> getAllTourByCriteria(@Valid @ModelAttribute("tourSearchForm") TourForm tourForm) {
+    public ResponseEntity<List<Tour>> getAllTourByCriteria(@Valid @ModelAttribute("tourForm") TourForm tourForm) {
 
         return ResponseEntity.ok(tourService.getAllByCriteria(tourForm));
     }

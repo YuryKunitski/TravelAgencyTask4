@@ -1,7 +1,6 @@
 package by.epam.kunitski.travelagency.service.impl;
 
 import by.epam.kunitski.travelagency.dao.entity.Tour;
-import by.epam.kunitski.travelagency.dao.repository.DAOTourCriteria;
 import by.epam.kunitski.travelagency.dao.repository.TourDAO;
 import by.epam.kunitski.travelagency.dao.searchform.TourForm;
 import by.epam.kunitski.travelagency.service.TourService;
@@ -9,7 +8,6 @@ import by.epam.kunitski.travelagency.service.exeption.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,13 +17,9 @@ public class TourServiceImpl implements TourService {
     @Autowired
     private TourDAO tourDAO;
 
-    @Autowired
-    private DAOTourCriteria daoTourCriteria;
-
     @Override
     public List<Tour> getAllByCriteria(TourForm tourForm) {
-
-        return daoTourCriteria.findToursByCriteria(tourForm);
+        return tourDAO.findToursByCriteria(tourForm);
     }
 
     @Override
