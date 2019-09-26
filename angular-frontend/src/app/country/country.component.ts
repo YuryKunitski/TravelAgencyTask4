@@ -14,9 +14,7 @@ export class CountryComponent implements OnInit {
   editing: boolean = false;
   editingCountry: Country = new Country();
 
-  constructor(
-    private countryService: CountryService,
-  ) {}
+  constructor(private countryService: CountryService) {}
 
   ngOnInit(): void {
     this.getCountries();

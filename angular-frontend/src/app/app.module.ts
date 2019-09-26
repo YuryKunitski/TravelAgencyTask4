@@ -8,27 +8,48 @@ import { CountryComponent } from './country/country.component';
 import { FormsModule } from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import { CountryService } from './country/country.service';
-import { UserComponent } from './user/user.component';
+import { HotelService } from './hotel/hotel.service';
+// import { UserComponent } from './user/user.component';
 import { HotelComponent } from './hotel/hotel.component';
-import { HeaderComponent } from './nav/header/header.component';
-import { FooterComponent } from './nav/footer/footer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavigatorComponent } from './navigator/navigator.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { CustomTableComponent } from './custom-table/custom-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
     AppComponent,
     CountryComponent,
-    UserComponent,
+    // UserComponent,
     HotelComponent,
-    HeaderComponent,
-    FooterComponent
+    NavigatorComponent,
+    CustomTableComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
-  providers: [CountryService],
+  providers: [CountryService, HotelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
