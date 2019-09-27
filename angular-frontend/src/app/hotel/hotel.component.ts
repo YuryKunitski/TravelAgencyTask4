@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Hotel } from './hotel';
 import { NgForm } from '@angular/forms';
 import { HotelService } from './hotel.service';
+import {TemplateRef, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-hotel',
@@ -9,11 +10,14 @@ import { HotelService } from './hotel.service';
   styleUrls: ['./hotel.component.css']
 })
 export class HotelComponent implements OnInit {
+  //type of templates
+  @ViewChild('readOnlyTemplate', {static: false}) readOnlyTemplate: TemplateRef<any>;
+  @ViewChild('editTemplate', {static: false}) editTemplate: TemplateRef<any>;
+     
   hotels: Hotel[];
   newHotel: Hotel = new Hotel();
-  editing: boolean=false;
+  editing: boolean = false;
   editingHotel: Hotel = new Hotel();
-
 
   constructor(private hotelService: HotelService) {}
 
@@ -26,13 +30,35 @@ export class HotelComponent implements OnInit {
     .then(hotels => this.hotels = hotels );
   }
 
- createHotels(hotelForm: NgForm): void {
-    this.hotelService.createHotel(this.newHotel)
+  // загружаем один из двух шаблонов
+  loadTemplate(hotel: Hotel) {
+    if (this.editingHotel && this.editingHotel.id == hotel.id) {
+        return this.editTemplate;
+    } else {
+        return this.readOnlyTemplate;
+    }
+}
+
+// добавление пользователя
+addHotel() {
+  this.editingHotel = new Hotel();
+  this.hotels.push(this.editingHotel);
+  this.editing = true;
+}
+
+ createHotel(hotelForm: Hotel): void {
+   if (this.editing){
+    this.hotelService.createHotel(this.editingHotel)
       .then(createHotel => {        
-        hotelForm.reset();
+        // hotelForm.reset();
         // this.newHotel = new Hotel();
         this.hotels.unshift(createHotel)
       });
+      this.editing = false;
+      this.editingHotel = null;
+    } else {
+      this.updateHotel(this.editingHotel);
+    }
   }
 
   deleteHotel(id: string): void {
@@ -58,7 +84,7 @@ export class HotelComponent implements OnInit {
   }
 
   clearEditing(): void {
-    this.editingHotel = new Hotel();
+    this.editingHotel =  new Hotel();
     this.editing = false;
   }
 }
