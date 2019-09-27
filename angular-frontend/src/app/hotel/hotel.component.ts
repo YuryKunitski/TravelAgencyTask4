@@ -46,9 +46,11 @@ addHotel() {
   this.editing = true;
 }
 
+
  createHotel(hotelForm: Hotel): void {
    if (this.editing){
     this.hotelService.createHotel(this.editingHotel)
+
       .then(createHotel => {        
         // hotelForm.reset();
         // this.newHotel = new Hotel();
