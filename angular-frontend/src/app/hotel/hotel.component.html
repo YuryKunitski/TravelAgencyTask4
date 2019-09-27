@@ -1,26 +1,124 @@
-<div class="entity-content">
+<div class="container">
         <h1 class="page-name">Hotels</h1>
         <div class="entity-create">
-          <form #hotelForm="ngForm" (ngSubmit)="createHotel(hotelForm)" novalidate>
-            <input type="text" id="hotelName" class="form-control" placeholder="Type a hotel to add and press enter..." 
-                   required
-                   name="name" [(ngModel)]="newHotel.name"
-                   #name="ngModel" >
-            <div *ngIf="name.errors && name.dirty"
-                 class="alert alert-danger">
-                <div [hidden]="!name.errors.required">
-                  name is required.
+            <form #hotelForm="ngForm" (ngSubmit)="createHotel(hotelForm)" novalidate>
+              <input type="text" id="hotelName" class="form-control" placeholder="hotel's name" 
+                     required
+                     name="name" [(ngModel)]="newHotel.name"
+                     #name="ngModel" >
+              <div *ngIf="name.errors && name.dirty"
+                   class="alert alert-danger">
+                  <div [hidden]="!name.errors.required">
+                    name is required.
+                  </div>
+              </div>
+              <!-- <input type="number" id="hotelStars" class="form-control" placeholder="hotel's stars" 
+                       required
+                       name="stars" [(ngModel)]="newHotel.stars"
+                       #name="ngModel" >
+                <div *ngIf="stars.errors && stars.dirty"
+                     class="alert alert-danger">
+                    <div [hidden]="!stars.errors.required">
+                      stars is required.
+                    </div>
+                </div> -->
+            </form>
+          </div>
+          <!-- <div class="entity-create">
+              <form #hotelForm="ngForm" (ngSubmit)="createHotel(hotelForm)" novalidate>
+                <input type="number" id="hotelStars" class="form-control" placeholder="Type a hotel's stars to add and press enter..." 
+                       required
+                       name="stars" [(ngModel)]="newHotel.stars"
+                       #name="ngModel" >
+                <div *ngIf="stars.errors && stars.dirty"
+                     class="alert alert-danger">
+                    <div [hidden]="!stars.errors.required">
+                      stars is required.
+                    </div>
                 </div>
-            </div>
-          </form>
-        </div>
-        <ol class="hotel-list">
-          <!-- <li *ngFor="let hotel of countries" [class.completed]="hotel.completed === true" > -->
+              </form>
+            </div> -->
+        <!-- --------------------- -->
+        <input type="button" value="Добавить" class="btn btn-default" (click)="addHotel()" />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <!-- <td>№</td> -->
+                    <td>Name</td>
+                    <td>Stars</td>
+                    <td>Website</td>
+                    <td>Feature</td>
+                    <td></td>
+                    <!-- <td></td> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let hotel of hotels">
+                    <ng-template [ngTemplateOutlet]="loadTemplate(hotel)" 
+                                [ngTemplateOutletContext]="{ $implicit: hotel}">
+                    </ng-template>
+                </tr>
+            </tbody>
+        </table>
+          <!--шаблон для чтения-->
+<ng-template #readOnlyTemplate let-hotel>
+    <td>{{hotel.name}}</td>
+    <td>{{hotel.stars}}</td>
+    <td>{{hotel.website}}</td>
+    <td>{{hotel.features}}</td>
+    <td>
+        <!-- <input type="button" value="Изменить" class="btn btn-default" (click)="editUser(user)" /> -->
+        <span class="entity-actions">
+            <a (click)="editHotel(hotel)">
+              <i class="material-icons edit">edit</i>
+            </a>
+            <a (click)="deleteHotel(hotel.id)">
+              <i class="material-icons delete">clear</i>
+            </a>
+        </span>
+      </td>
+    <!-- <td>
+        <input type="button" value="Удалить" (click)="deleteUser(user)" class="btn btn-danger" />
+    </td> -->
+</ng-template>
+
+<!--шаблон для редактирования-->
+<ng-template #editTemplate>
+    <!-- <td>
+        <input type="text" [(ngModel)]="editingHotel.id" readonly disabled class="form-control" />
+    </td> -->
+    <td>
+        <input type="text" [(ngModel)]="editingHotel.name" class="form-control" />
+    </td>
+    <td>
+        <input type="number" [(ngModel)]="editingHotel.stars" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editingHotel.website" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="editingHotel.features" class="form-control" />
+    </td>
+    <td>
+        <!-- <input type="button" value="Сохранить" (click)="saveUser()" class="btn btn-success" /> -->
+        <span class="edit-actions">
+            <a (click)="updateHotel(editingHotel)">
+              <i class="material-icons">done</i>
+            </a>
+            <a (click)="clearEditing()">
+              <i class="material-icons">clear</i>
+            </a>
+        </span>
+      </td>
+    <!-- <td>
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </td> -->
+</ng-template>
+        <!-- ----------- -->
+        <!-- <ol class="hotel-list">
     <li *ngFor="let hotel of hotels" >
             <div class="entity-row" *ngIf="!editing || editingHotel.id != hotel.id">
-                <!-- <a class="entity-completed" (click)="toggleCompleted(hotel)">
-                  <i class="material-icons toggle-completed-checkbox"></i> 
-                </a>  -->
+              
                 <span class="entity-name">
                   {{hotel.name}}
                 </span>
@@ -30,6 +128,9 @@
                       <span class="entity-name">
                             {{hotel.website}}
                           </span>
+                        <span class="entity-name">
+                             {{hotel.features}}
+                           </span>
                 <span class="entity-actions">
                     <a (click)="editHotel(hotel)">
                       <i class="material-icons edit">edit</i>
@@ -40,8 +141,10 @@
                 </span>
             </div>
             <div class="entity-edit" *ngIf="editing && editingHotel.id === hotel.id">
-                <input class="form-control" type="text" 
+                <input type="text" 
                  [(ngModel)]="editingHotel.name" required>
+                 <input type="number" 
+                 [(ngModel)]="editingHotel.stars" required>
                 <span class="edit-actions">
                     <a (click)="updateHotel(editingHotel)">
                       <i class="material-icons">done</i>
@@ -52,7 +155,7 @@
                 </span>
             </div>
           </li>
-        </ol>
+        </ol> -->
         <div class="no-entities" *ngIf="hotels.length==0">
             <p>No entities Found!</p>
         </div>

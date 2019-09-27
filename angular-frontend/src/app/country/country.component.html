@@ -34,9 +34,9 @@
             </span>
         </div>
         <div class="entity-edit" *ngIf="editing && editingCountry.id === country.id">
-            <input class="form-control" type="text" 
+            <input  type="text" 
              [(ngModel)]="editingCountry.name" required>
-            <span class="edit-actions">
+            <span class="edit-actions-custom">
                 <a (click)="updateCountry(editingCountry)">
                   <i class="material-icons">done</i>
                 </a>

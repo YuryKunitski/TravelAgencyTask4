@@ -16,7 +16,6 @@ public class HotelServiceImpl implements HotelService {
     @Autowired
     private HotelDAO hotelDAO;
 
-
     @Override
     public Hotel add(Hotel hotel) {
         return hotelDAO.save(hotel);
@@ -26,7 +25,8 @@ public class HotelServiceImpl implements HotelService {
     public Hotel update(Hotel hotel, String id) throws EntityNotFoundException {
 
         if (!hotelDAO.existsById(id)){
-            throw new EntityNotFoundException("Couldn't find " + Hotel.class.getSimpleName() + " with id=" + id);
+            hotelDAO.save(hotel);
+//            throw new EntityNotFoundException("Couldn't find " + Hotel.class.getSimpleName() + " with id=" + id);
         }
 
         hotel.setId(id);

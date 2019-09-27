@@ -1,9 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-/* @import 'uui/css/custom-styles.css';
-@import 'uui/bootstrap/css/bootstrap.min.css';
-@import 'uui/css/uui-all.css';
-@import 'uui/fonts/font-awesome/css/font-awesome.css';
-@import 'uui/css/lib/components/jquery.mCustomScrollbar.min.css'; */
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -49,18 +44,18 @@ input {
   box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
 }
 
-.form-control {
+.form-control-costom {
   font-size: 16px;
   padding-left: 15px;
   outline: none;
   border: 1px solid #E8E8E8;
 }
 
-.form-control:focus {
+.form-control-costom:focus {
   border: 1px solid #626262;
 }
 
-.entity-content .form-control {
+.entity-content .form-control-costom {
   width: 100%;
   height: 50px;
 }
@@ -119,15 +114,15 @@ input {
   font-size: 20px;
 }
 
-.entity-content .entity-actions, .entity-content .edit-actions {
+.entity-content .entity-actions, .entity-content .edit-actions-custom {
     float: right;
 }
 
-.entity-content .entity-actions i, .entity-content .edit-actions i {
+.entity-content .entity-actions i, .entity-content .edit-actions-custom i {
     font-size: 17px;
 }
 
-.entity-content .entity-actions a, .entity-content .edit-actions a {
+.entity-content .entity-actions a, .entity-content .edit-actions-custom a {
    /* display: list-item;   */
    text-align: center; 
   width: 35px;
@@ -135,7 +130,7 @@ input {
   cursor: pointer;
 }
 
-.entity-content .entity-actions a:hover, .entity-content .edit-actions a:hover {
+.entity-content .entity-actions a:hover, .entity-content .edit-actions-custom a:hover {
   background-color: #f4f4f4;
 }
 
@@ -143,7 +138,7 @@ input {
   width: calc(100% - 80px);
   height: 35px;
 }
-.entity-content .edit-actions {
+.entity-content .edit-actions-custom {
   text-align: right;
 }
 
