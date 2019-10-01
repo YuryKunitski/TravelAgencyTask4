@@ -32,7 +32,7 @@ public class Hotel {
     @Range(min = -180, max = 180)
     private double longitude;
 
-//    @NotNull
+    @NotNull
 //    @Enumerated(EnumType.STRING)
 //    @Type(type = "pgsql_enum")
     private FeatureType features;

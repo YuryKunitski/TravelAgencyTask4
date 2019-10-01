@@ -5,5 +5,13 @@ export class Hotel {
  website: string;
  latitude: number;
  longitude: number;
- features: string
+ features: Feature
   }
+
+  export enum Feature {
+    SWIMMING_POOL,
+    FREE_WIFI,
+    PARKING,
+    CHILDREN_AREA,
+    RESTAURANT
+}
