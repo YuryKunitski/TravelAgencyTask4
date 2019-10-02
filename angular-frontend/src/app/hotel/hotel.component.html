@@ -1,6 +1,6 @@
 <div class="container">
         <h1 class="page-name">Hotels</h1>
-        <input *ngIf="isNewHotel == false" type="button" value="Add hotel" class="btn btn-success" (click)="addHotel()" />
+        <input *ngIf="isNewHotel == false && editing == false" type="button" value="Add hotel" class="btn btn-success" (click)="addHotel()" />
         <table class="table table-striped">
             <thead>
                 <tr style="color: rgb(25, 102, 15)">
@@ -10,6 +10,7 @@
                     <td>Latitude</td>
                     <td>Longitude</td>
                     <td>Feature</td>
+                    <td></td>
                     <td></td>
                 </tr>
             </thead>
@@ -22,58 +23,109 @@
             </tbody>
         </table>
           <!--шаблон для чтения-->
+          <!-- <form> -->
 <ng-template #readOnlyTemplate let-hotel>
     <td>{{hotel.name}}</td>
     <td>{{hotel.stars}}</td>
-    <td>{{hotel.website}}</td>
+    <td><a href="mailto:{{ hotel.website }}">{{ hotel.website }}</a></td>
     <td>{{hotel.latitude}}</td>
     <td>{{hotel.longitude}}</td>
     <td>{{hotel.features}}</td>
     <td>
-        <span class="entity-actions" style="cursor: pointer">
+    <span class="entity-actions" style="cursor: pointer">
             <a *ngIf="isNewHotel == false" (click)="editHotel(hotel)">
               <i class="material-icons edit">edit</i>
             </a>
-            <a (click)="deleteHotel(hotel.id)">
-              <i class="material-icons delete">clear</i>
-            </a>
-        </span>
+    </span>
+      </td>
+      <td>
+          <span class="entity-actions" style="cursor: pointer">
+        <a (click)="deleteHotel(hotel.id)">
+          <i class="material-icons delete">delete</i>
+        </a>
+      </span>
       </td>
 </ng-template>
 
 <!--шаблон для редактирования-->
 <ng-template #editTemplate>
     <td>
-        <input type="text" [(ngModel)]="editingHotel.name" class="form-control" />
+        <input type="text" [(ngModel)]="editingHotel.name" class="form-control" name="name"
+        #name="ngModel" required/>
+        <div *ngIf="name.errors && name.dirty"
+        class="alert alert-danger">
+       <div [hidden]="!name.errors.required">
+         name is required.
+       </div> 
+   </div>
     </td>
     <td>
-        <input type="number" [(ngModel)]="editingHotel.stars" class="form-control" />
+        <input type="number" [(ngModel)]="editingHotel.stars" class="form-control" name="stars"
+        min="1" max="5" required #stars="ngModel" />
+         <div *ngIf="stars.errors && stars.dirty"
+        class="alert alert-danger">
+       <div [hidden]="!stars.errors.required">
+         stars is required.
+       </div> 
+   </div>
       </td>
     <td>
-        <input type="text" [(ngModel)]="editingHotel.website" class="form-control" />
+        <input type="text" [(ngModel)]="editingHotel.website" class="form-control" name="website"
+        #website="ngModel" required/>
+        <div *ngIf="website.errors && website.dirty"
+        class="alert alert-danger">
+       <div [hidden]="!website.errors.required">
+          website is required.
+       </div> 
+   </div>
     </td>
     <td>
-      <input type="number" [(ngModel)]="editingHotel.latitude" class="form-control" />
+      <input type="number" [(ngModel)]="editingHotel.latitude" class="form-control" name="latitude"
+       #latitude="ngModel" min="-90" max="90"  required/>
+       <div *ngIf="latitude.errors && latitude.dirty"
+       class="alert alert-danger">
+      <div [hidden]="!latitude.errors.required">
+          latitude is required.
+      </div> 
+  </div>
   </td>
   <td>
-    <input type="number" [(ngModel)]="editingHotel.longitude" class="form-control" />
+    <input type="number" [(ngModel)]="editingHotel.longitude" class="form-control" name="longitude"
+     #longitude="ngModel" min="-180" max="180" required/>
+     <div *ngIf="longitude.errors && longitude.dirty"
+       class="alert alert-danger">
+      <div [hidden]="!longitude.errors.required">
+          longitude is required.
+      </div> 
+      <!-- <div [hidden]="!longitude.errors.min">
+          Min range is -180.
+      </div> 
+      <div [hidden]="!longitude.errors.max">
+          Max range is 180.
+      </div> -->
+  </div>
 </td>
     <td>
-    <select [(ngModel)]="editingHotel.features" class="form-control">
+    <select [(ngModel)]="editingHotel.features" class="form-control" name="features">
       <option *ngFor="let feature of keys()" [value]="feature">{{feature}}</option>
     </select>
   </td>
     <td>
-        <span class="edit-actions" style="cursor: pointer">
+  <span class="edit-actions" style="cursor: pointer">        
             <a (click)="createHotel(hotelForm)">
               <i class="material-icons">done</i>
             </a>
-            <a (click)="clearEditing()">
-              <i class="material-icons">clear</i>
-            </a>
-        </span>
+          </span>
+      </td>
+      <td>
+  <span class="edit-actions" style="cursor: pointer">
+        <a (click)="clearEditing()">
+          <i class="material-icons">clear</i>
+        </a>
+    </span>
       </td>
 </ng-template>
+<!-- </form> -->
         <div class="no-entities" *ngIf="hotels.length==0">
             <p>No entities Found!</p>
         </div>

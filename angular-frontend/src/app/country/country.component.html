@@ -1,9 +1,9 @@
 <div class="entity-content">
     <h1 class="page-name">Countries</h1>
     <div class="entity-create">
-      <form #countryForm="ngForm" (ngSubmit)="createCountry(countryForm)" novalidate>
+      <form #countryForm="ngForm" (ngSubmit)="createCountry(countryForm)" >
         <input type="text" id="countryName" class="form-control" placeholder="Type a country to add and press enter..." 
-               required
+               required 
                name="name" [(ngModel)]="newCountry.name"
                #name="ngModel" >
         <div *ngIf="name.errors && name.dirty"

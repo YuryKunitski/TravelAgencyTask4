@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Hotel } from './hotel';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable} from 'rxjs';   
+import {Observable, throwError} from 'rxjs';   
 
 @Injectable()
 export class HotelService {
   private baseUrl = 'http://localhost:8080';
 
-  constructor(private http:HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   getHotels():  Promise<Hotel[]> {
     return this.http.get(this.baseUrl + '/hotel/get_all/')
@@ -40,5 +40,6 @@ export class HotelService {
   private handleError(error: any): Promise<any> {
     console.error('Some error occured', error);
     return Promise.reject(error.message || error);
+    // return Observable.throw(error.status).toPromise();
   }
 }

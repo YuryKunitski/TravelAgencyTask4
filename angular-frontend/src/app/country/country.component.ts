@@ -29,7 +29,7 @@ export class CountryComponent implements OnInit {
     this.countryService.createCountry(this.newCountry)
       .then(createCountry => {        
         countryForm.reset();
-        // this.newCountry = new Country();
+        this.newCountry = new Country();
         this.countries.unshift(createCountry)
       });
 

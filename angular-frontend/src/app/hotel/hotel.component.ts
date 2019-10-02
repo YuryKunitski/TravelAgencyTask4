@@ -20,16 +20,17 @@ export class HotelComponent implements OnInit {
   isNewHotel: boolean = false;
   editingHotel: Hotel = new Hotel();
   features = Feature
-  keys() : Array<string> {
-      var keys = Object.keys(this.features);
-      return keys.slice(keys.length / 2);
-  }
 
   constructor(private hotelService: HotelService) {}
 
   ngOnInit(): void {
     this.getHotels();
   }
+
+  keys() : Array<string> {
+    var keys = Object.keys(this.features);
+    return keys.slice(keys.length / 2);
+}
 
   getHotels(): void {
     this.hotelService.getHotels()
