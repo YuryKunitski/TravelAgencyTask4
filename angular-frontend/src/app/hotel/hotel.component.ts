@@ -15,7 +15,7 @@ export class HotelComponent implements OnInit {
   @ViewChild('editTemplate', {static: false}) editTemplate: TemplateRef<any>;
      
   hotels: Hotel[];
-  newHotel: Hotel = new Hotel();
+  // newHotel: Hotel = new Hotel();
   editing: boolean = false;
   isNewHotel: boolean = false;
   editingHotel: Hotel = new Hotel();
@@ -46,7 +46,6 @@ export class HotelComponent implements OnInit {
     }
 }
 
-// добавление пользователя
 addHotel() {
   this.editingHotel = new Hotel();
   this.hotels.unshift(this.editingHotel);
@@ -55,19 +54,16 @@ addHotel() {
 
 
  createHotel(hotelForm: NgForm): void {
-   if (this.editing == false){
+   if (this.isNewHotel){
     // if(this.editingHotel.id == null){
     this.hotelService.createHotel(this.editingHotel)
 
       .then(createHotel => {        
         hotelForm.reset();
-        this.newHotel = new Hotel();
-        this.hotels.unshift(createHotel)
+        // this.newHotel = new Hotel();
+        this.hotels.push(createHotel)
       });
-      // this.clearEditing();
-      // this.editing = false;
-      this.isNewHotel = false;
-      this.editingHotel = null;
+      this.clearEditing();
     } else {
       this.updateHotel(this.editingHotel);
     }
@@ -104,5 +100,7 @@ addHotel() {
   clearEditing(): void {
     this.editingHotel =  null;
     this.editing = false;
+    this.isNewHotel = false;
+    this.getHotels();
   }
 }

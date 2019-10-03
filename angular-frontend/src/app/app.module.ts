@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import { CountryService } from './country/country.service';
 import { HotelService } from './hotel/hotel.service';
+import { TourService } from './tour/tour.service';
 // import { UserComponent } from './user/user.component';
 import { HotelComponent } from './hotel/hotel.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +24,7 @@ import { CustomTableComponent } from './custom-table/custom-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { TourComponent } from './tour/tour.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { MatSortModule } from '@angular/material/sort';
     HotelComponent,
     NavigatorComponent,
     CustomTableComponent,
+    TourComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatSortModule
   ],
-  providers: [CountryService, HotelService],
+  providers: [CountryService, HotelService, TourService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

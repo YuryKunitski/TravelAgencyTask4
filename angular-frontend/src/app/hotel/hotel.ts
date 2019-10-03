@@ -5,7 +5,7 @@ export class Hotel {
  website: string;
  latitude: number;
  longitude: number;
- features: string
+ features: Feature;
   }
 
   export enum Feature {

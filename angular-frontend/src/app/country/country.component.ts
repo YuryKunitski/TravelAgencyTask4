@@ -32,7 +32,6 @@ export class CountryComponent implements OnInit {
         this.newCountry = new Country();
         this.countries.unshift(createCountry)
       });
-
   }
 
   deleteCountry(id: string): void {

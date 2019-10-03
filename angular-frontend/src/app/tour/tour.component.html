@@ -1,0 +1,132 @@
+<div class="container">
+    <h1 class="page-name">Tours</h1>
+    <!-- <input *ngIf="isNewHotel == false && editing == false" type="button" value="Add hotel" class="btn btn-success" (click)="addHotel()" /> -->
+    <table class="table table-striped">
+        <thead>
+            <tr style="color: rgb(25, 102, 15)">
+                <td>Photo</td>
+                <td>Date</td>
+                <td>Duration</td>
+                <td>Description</td>
+                <td>Cost</td>
+                <td>Hotel</td>
+                <td>Country</td>
+                <td>Tour type</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+                <tr *ngFor="let tour of tours">
+                        <ng-template [ngTemplateOutlet]="loadTemplate(tour)" 
+                                    [ngTemplateOutletContext]="{ $implicit: tour}">
+                        </ng-template>
+                </tr>
+        </tbody>
+    </table>
+
+    <!--шаблон для чтения-->
+<ng-template #readOnlyTemplate let-hotel let-tour>
+            <!-- <td>{{tour.photo}}</td> -->
+            <td><img src="tour/tour_photo.png" alt="photo"/></td>
+            <td>{{tour.date}}</td>
+             <!-- <td><a href="mailto:{{ hotel.duration }}">{{ hotel.duration }}</a></td>  -->
+            <td>{{tour.duration}}</td>
+            <td>{{tour.description}}</td>
+            <td>{{tour.cost}}</td>
+            <td>{{tour.hotel}}</td>
+            <td>{{tour.country}}</td>
+            <td>{{tour.tour_type}}</td>
+            <td>
+                <span class="entity-actions" style="cursor: pointer">
+                    <a (click)="editTour(tour)">
+                        <i class="material-icons edit">edit</i>
+                    </a>
+                </span>
+            </td>
+            <td>
+                <span class="entity-actions" style="cursor: pointer">
+                    <a (click)="deleteTour(tour.id)">
+                        <i class="material-icons delete">delete</i>
+                    </a>
+                </span>
+            </td>
+    </ng-template>
+
+    <!--шаблон для редактирования-->
+<ng-template #editTemplate >
+                <td><img src="tour/tour_photo.png" alt="photo"/></td>
+        <td>
+            <input type="date" [(ngModel)]="editingTour.date" class="form-control" name="date"
+             required #date="ngModel" />
+             <!-- <div *ngIf="stars.errors && stars.dirty"
+            class="alert alert-danger">
+           <div [hidden]="!stars.errors.required">
+             stars is required.
+           </div> 
+       </div> -->
+          </td>
+        <td>
+            <input type="number" [(ngModel)]="editingTour.duration" class="form-control" name="duration"
+            #duration="ngModel" required/>
+            <div *ngIf="duration.errors && duration.dirty"
+            class="alert alert-danger">
+           <div [hidden]="!duration.errors.required">
+              duration is required.
+           </div> 
+       </div>
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="editingTour.description" class="form-control" name="description"
+           #description="ngModel" required/>
+           <div *ngIf="description.errors && description.dirty"
+           class="alert alert-danger">
+          <div [hidden]="!description.errors.required">
+              description is required.
+          </div> 
+      </div>
+      </td>
+      <td>
+        <input type="number" [(ngModel)]="editingTour.cost" class="form-control" name="cost"
+         #cost="ngModel" required/>
+         <div *ngIf="cost.errors && cost.dirty"
+           class="alert alert-danger">
+          <div [hidden]="!cost.errors.required">
+              cost is required.
+          </div> 
+          <!-- <div [hidden]="!cost.errors.min">
+              Min range is -180.
+          </div> 
+          <div [hidden]="!cost.errors.max">
+              Max range is 180.
+          </div> -->
+      </div>
+    </td>
+    <td>{{tour.hotel}}</td>
+    <td>{{tour.country}}</td>
+        <td>
+        <select [(ngModel)]="editingTour.tour_type" class="form-control" name="tour_type">
+          <option *ngFor="let tour_type of keys()" [value]="tour_type">{{tour_type}}</option>
+        </select>
+      </td>
+        <td>
+      <span class="edit-actions" style="cursor: pointer">        
+                <a (click)="updateTour(editingTour)" >
+                  <i class="material-icons">done</i>
+                </a>
+              </span>
+          </td>
+          <td>
+      <span class="edit-actions" style="cursor: pointer">
+            <a (click)="clearEditing()">
+              <i class="material-icons">clear</i>
+            </a>
+        </span>
+          </td>
+    
+    </ng-template>
+
+    <div class="no-entities" *ngIf="tours.length==0">
+        <p>No entities Found!</p>
+    </div>
+</div>

@@ -23,7 +23,6 @@
             </tbody>
         </table>
           <!--шаблон для чтения-->
-          <!-- <form> -->
 <ng-template #readOnlyTemplate let-hotel>
     <td>{{hotel.name}}</td>
     <td>{{hotel.stars}}</td>
@@ -48,11 +47,12 @@
 </ng-template>
 
 <!--шаблон для редактирования-->
+<!-- <form #hotelForm="ngForm" > -->
 <ng-template #editTemplate>
     <td>
         <input type="text" [(ngModel)]="editingHotel.name" class="form-control" name="name"
         #name="ngModel" required/>
-        <div *ngIf="name.errors && name.dirty"
+        <div *ngIf="name.errors && name.dirty" 
         class="alert alert-danger">
        <div [hidden]="!name.errors.required">
          name is required.
@@ -112,7 +112,7 @@
   </td>
     <td>
   <span class="edit-actions" style="cursor: pointer">        
-            <a (click)="createHotel(hotelForm)">
+            <a (click)="createHotel(hotelForm)" >
               <i class="material-icons">done</i>
             </a>
           </span>
@@ -124,8 +124,10 @@
         </a>
     </span>
       </td>
+
 </ng-template>
 <!-- </form> -->
+
         <div class="no-entities" *ngIf="hotels.length==0">
             <p>No entities Found!</p>
         </div>
