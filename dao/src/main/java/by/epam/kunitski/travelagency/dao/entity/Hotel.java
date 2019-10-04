@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -16,13 +17,14 @@ public class Hotel {
     @Id
     private String id;
 
-    @NotNull
+    @NotBlank
     @Indexed(unique=true)
     private String name;
 
     @Range(min = 1, max = 5)
     private int stars;
 
+    @NotBlank
     @URL
     private String website;
 

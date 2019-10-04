@@ -39,6 +39,11 @@ export class HotelService {
 
   private handleError(error: any): Promise<any> {
     console.error('Some error occured', error);
+    
+    if(error.message){
+      alert(error.message);
+      }
+
     return Promise.reject(error.message || error);
     // return Observable.throw(error.status).toPromise();
   }

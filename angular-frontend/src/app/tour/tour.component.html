@@ -1,6 +1,8 @@
 <div class="container">
     <h1 class="page-name">Tours</h1>
-    <!-- <input *ngIf="isNewHotel == false && editing == false" type="button" value="Add hotel" class="btn btn-success" (click)="addHotel()" /> -->
+    <input class="btn btn-success" *ngIf="isNewTour == false && editing == false"
+    type="button" value="Add tour" (click)="addTour()" />
+
     <table class="table table-striped">
         <thead>
             <tr style="color: rgb(25, 102, 15)">
@@ -26,20 +28,20 @@
     </table>
 
     <!--шаблон для чтения-->
-<ng-template #readOnlyTemplate let-hotel let-tour>
+<ng-template #readOnlyTemplate let-tour>
             <!-- <td>{{tour.photo}}</td> -->
-            <td><img src="tour/tour_photo.png" alt="photo"/></td>
+            <td><img src="assets/images/tour_photo.jpg" alt="photo" width="100"/></td>
             <td>{{tour.date}}</td>
              <!-- <td><a href="mailto:{{ hotel.duration }}">{{ hotel.duration }}</a></td>  -->
             <td>{{tour.duration}}</td>
             <td>{{tour.description}}</td>
             <td>{{tour.cost}}</td>
-            <td>{{tour.hotel}}</td>
-            <td>{{tour.country}}</td>
+            <td>{{tour.hotel.name}} {{tour.hotel.stars}}*</td>
+            <td>{{tour.country.name}}</td>
             <td>{{tour.tour_type}}</td>
             <td>
                 <span class="entity-actions" style="cursor: pointer">
-                    <a (click)="editTour(tour)">
+                    <a *ngIf="isNewTour == false" (click)="editTour(tour)">
                         <i class="material-icons edit">edit</i>
                     </a>
                 </span>
@@ -55,7 +57,7 @@
 
     <!--шаблон для редактирования-->
 <ng-template #editTemplate >
-                <td><img src="tour/tour_photo.png" alt="photo"/></td>
+                <td><img src="assets/images/tour_photo.jpg" alt="photo" width="100"/></td>
         <td>
             <input type="date" [(ngModel)]="editingTour.date" class="form-control" name="date"
              required #date="ngModel" />
@@ -87,7 +89,7 @@
       </div>
       </td>
       <td>
-        <input type="number" [(ngModel)]="editingTour.cost" class="form-control" name="cost"
+        <input type="number" [(ngModel)]="editingTour.cost" class="form-control" name="cost" style="width: 80px"
          #cost="ngModel" required/>
          <div *ngIf="cost.errors && cost.dirty"
            class="alert alert-danger">
@@ -102,16 +104,25 @@
           </div> -->
       </div>
     </td>
-    <td>{{tour.hotel}}</td>
-    <td>{{tour.country}}</td>
+    <td>
+            <select class="form-control" [(ngModel)]="editingTour.hotel" name="editingTour.hotel" style="width: 150px">
+              <option *ngFor="let hotel of hotels" [ngValue]="hotel" >{{hotel.name}}</option>
+            </select>
+    </td>
+     <td>
+            <select class="form-control" [(ngModel)]="editingTour.country" name="editingTour.country" style="width: 150px">
+              <option *ngFor="let country of countries" [ngValue]="country" >{{country.name}}</option>
+            </select>
+    </td>
+
         <td>
-        <select [(ngModel)]="editingTour.tour_type" class="form-control" name="tour_type">
-          <option *ngFor="let tour_type of keys()" [value]="tour_type">{{tour_type}}</option>
+        <select [(ngModel)]="editingTour.tour_type" class="form-control" name="tour_type" style="width: 200px">
+          <option *ngFor="let tour_type of keys()" [value]="tour_type" >{{tour_type}}</option>
         </select>
       </td>
         <td>
       <span class="edit-actions" style="cursor: pointer">        
-                <a (click)="updateTour(editingTour)" >
+                <a (click)="createTour(editingTour)" >
                   <i class="material-icons">done</i>
                 </a>
               </span>
@@ -126,7 +137,7 @@
     
     </ng-template>
 
-    <div class="no-entities" *ngIf="tours.length==0">
+    <div class="no-entities" *ngIf="tours?.length==0">
         <p>No entities Found!</p>
     </div>
 </div>

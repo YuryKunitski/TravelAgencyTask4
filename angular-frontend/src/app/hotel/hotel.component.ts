@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Hotel, Feature } from './hotel';
 import { NgForm } from '@angular/forms';
 import { HotelService } from './hotel.service';
@@ -21,11 +21,15 @@ export class HotelComponent implements OnInit {
   editingHotel: Hotel = new Hotel();
   features = Feature
 
-  constructor(private hotelService: HotelService) {}
+  constructor(private cdref: ChangeDetectorRef, private hotelService: HotelService) {}
 
   ngOnInit(): void {
     this.getHotels();
   }
+
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
+     }
 
   keys() : Array<string> {
     var keys = Object.keys(this.features);
@@ -57,7 +61,6 @@ addHotel() {
    if (this.isNewHotel){
     // if(this.editingHotel.id == null){
     this.hotelService.createHotel(this.editingHotel)
-
       .then(createHotel => {        
         hotelForm.reset();
         // this.newHotel = new Hotel();

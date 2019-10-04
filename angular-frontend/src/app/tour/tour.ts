@@ -1,3 +1,7 @@
+import { Hotel } from '../hotel/hotel';
+import { Country } from '../country/country';
+
+
 export class Tour {
     id: string;
     photo: string;
@@ -5,8 +9,8 @@ export class Tour {
     duration: number;
     description: string;
     cost: number;
-    hotel: string;
-    country: string;
+    hotel: Hotel;
+    country: Country;
     tour_type: TourType
 }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Tour } from './tour';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';   
 
 @Injectable()
@@ -58,10 +58,14 @@ export class TourService {
       .catch(this.handleError);
   }
 
-  private handleError(error: any): Promise<any> {
+  private handleError(error: HttpErrorResponse): Promise<any> {
     console.error('Some error occured', error);
+    // Observable.throw(error.message || error).toPromise();
+    
+    if(error.message){
+    alert(error.message);
+    }
     return Promise.reject(error.message || error);
-    // return Observable.throw(error.status).toPromise();
   }
 
 }

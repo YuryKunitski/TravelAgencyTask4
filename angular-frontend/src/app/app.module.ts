@@ -25,6 +25,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TourComponent } from './tour/tour.component';
+import { TourSearchFormComponent } from './tour-search-form/tour-search-form.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TourComponent } from './tour/tour.component';
     HotelComponent,
     NavigatorComponent,
     CustomTableComponent,
-    TourComponent
+    TourComponent,
+    TourSearchFormComponent
   ],
   imports: [
     BrowserModule,
