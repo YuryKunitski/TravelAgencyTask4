@@ -1,6 +1,118 @@
 <div class="container">
     <h1 class="page-name">Tours</h1>
+
     <input class="btn btn-success" *ngIf="isNewTour == false && editing == false"
+    type="button" value="Show/close searching tours" (click)="editSearhing()" /><br>
+
+    <div *ngIf="isSearching == true">
+            <table class="for_tour_search">
+        <tr>
+                <td><span>Min cost</span><br>
+                    <input type="number" [(ngModel)]="tourForm.minCost" class="form-control" name="minCost"
+                         required #date="ngModel" placeholder="Min cost" />
+                         <!-- <div *ngIf="minCost.errors && minCost.dirty"
+                        class="alert alert-danger">
+                       <div [hidden]="!minCost.errors.required">
+                            minCost is required.
+                       </div> 
+                   </div> -->
+                </td>
+        
+                <td><span> Min duration</span><br>
+                        <input type="number" [(ngModel)]="tourForm.minDuration" class="form-control" name="minDuration"
+                             required #date="ngModel" placeholder="Min duration" />
+                             <!-- <div *ngIf="minDuration.errors && minDuration.dirty"
+                            class="alert alert-danger">
+                           <div [hidden]="!minDuration.errors.required">
+                                minDuration is required.
+                           </div> 
+                       </div> -->
+                </td>
+        
+                <td><span> Min hotel's stars</span><br>
+                        <input type="number" [(ngModel)]="tourForm.minStars" class="form-control" name="minStars"
+                         max="5" min="1" required #date="ngModel"  placeholder="Min hotel's stars"/>
+                             <!-- <div *ngIf="minStars.errors && minStars.dirty"
+                            class="alert alert-danger">
+                           <div [hidden]="!minStars.errors.required">
+                                minStars is required.
+                           </div> 
+                       </div> -->
+                </td>
+        
+                <td><span> Min date </span><br>
+                        <input type="date" [(ngModel)]="tourForm.minDate" class="form-control" name="minDate"
+                             required #date="ngModel" placeholder="Min date" />
+                             <!-- <div *ngIf="minDate.errors && minDate.dirty"
+                            class="alert alert-danger">
+                           <div [hidden]="!minDate.errors.required">
+                                minDate is required.
+                           </div> 
+                       </div> -->
+                </td>
+                <td><span>Tour type</span><br>
+                        <select [(ngModel)]="tourForm.tour_type" class="form-control" name="tour_type" style="width: 200px">
+                          <option *ngFor="let tour_type of keys()" [value]="tour_type" >{{tour_type}}</option>
+                        </select>
+                      
+                </td>   
+        </tr>
+        <tr>
+            <td><span>Max cost</span><br>
+                <input type="number" [(ngModel)]="tourForm.maxCost" class="form-control" name="maxCost"
+                     required #date="ngModel" placeholder="Max cost" />
+                     <!-- <div *ngIf="minCost.errors && minCost.dirty"
+                    class="alert alert-danger">
+                   <div [hidden]="!minCost.errors.required">
+                        minCost is required.
+                   </div> 
+               </div> -->
+            </td>
+    
+            <td><span> Max duration</span><br>
+                    <input type="number" [(ngModel)]="tourForm.maxDuration" class="form-control" name="maxDuration"
+                         required #date="ngModel" placeholder="Max duration" />
+                         <!-- <div *ngIf="minDuration.errors && minDuration.dirty"
+                        class="alert alert-danger">
+                       <div [hidden]="!minDuration.errors.required">
+                            minDuration is required.
+                       </div> 
+                   </div> -->
+            </td>
+    
+            <td><span> Max hotel's stars</span><br>
+                    <input type="number" [(ngModel)]="tourForm.maxStars" class="form-control" name="maxStars"
+                         required #date="ngModel"  placeholder="Max hotel's stars"/>
+                         <!-- <div *ngIf="minStars.errors && minStars.dirty"
+                        class="alert alert-danger">
+                       <div [hidden]="!minStars.errors.required">
+                            minStars is required.
+                       </div> 
+                   </div> -->
+            </td>
+    
+            <td><span> Max date </span><br>
+                    <input type="date" [(ngModel)]="tourForm.maxDate" class="form-control" name="maxDate"
+                         required #date="ngModel" placeholder="Max date"/>
+                         <!-- <div *ngIf="minDate.errors && minDate.dirty"
+                        class="alert alert-danger">
+                       <div [hidden]="!minDate.errors.required">
+                            minDate is required.
+                       </div> 
+                   </div> -->
+            </td>
+            <td><span>Country</span><br>
+                <select class="form-control" name="country"
+                [(ngModel)]="tourForm.countryName" style="width: 200px">
+                 <option *ngFor="let country of countries" [ngValue]="country.name" >{{country.name}}</option>
+               </select>
+            </td> 
+        </tr>
+            </table>
+            <button (click)="getToursBySearch(tourForm)" class="btn btn btn-outline-success">Search</button>
+    </div>
+
+    <br><input class="btn btn-success" *ngIf="isNewTour == false && editing == false"
     type="button" value="Add tour" (click)="addTour()" />
 
     <table class="table table-striped">
@@ -105,12 +217,14 @@
       </div>
     </td>
     <td>
-            <select class="form-control" [(ngModel)]="editingTour.hotel" name="editingTour.hotel" style="width: 150px">
-              <option *ngFor="let hotel of hotels" [ngValue]="hotel" >{{hotel.name}}</option>
+            <select class="form-control" name="hotel"
+            [compareWith]="compareFn" [(ngModel)]="editingTour.hotel" style="width: 150px">
+              <option *ngFor="let hotel of hotels" [ngValue]="hotel">{{hotel.name}}</option>
             </select>
     </td>
      <td>
-            <select class="form-control" [(ngModel)]="editingTour.country" name="editingTour.country" style="width: 150px">
+            <select class="form-control" name="country" [compareWith]="compareFn"
+             [(ngModel)]="editingTour.country" style="width: 150px">
               <option *ngFor="let country of countries" [ngValue]="country" >{{country.name}}</option>
             </select>
     </td>
@@ -134,6 +248,7 @@
             </a>
         </span>
           </td>
+          <td><span>Editing tour {{editingTour}}</span></td>
     
     </ng-template>
 

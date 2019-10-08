@@ -7,6 +7,8 @@ import { Country } from '../country/country';
 import { CountryService } from '../country/country.service';
 import { Hotel } from '../hotel/hotel';
 import { HotelService } from '../hotel/hotel.service';
+import { TourForm } from './tour-form';
+
 
 @Component({
   selector: 'app-tour',
@@ -27,12 +29,15 @@ export class TourComponent implements OnInit {
   tourType = TourType;
   countries: Country[];
   hotels: Hotel[];
+  isSearching: boolean = false;
+  tourForm: TourForm = new TourForm();
 
   constructor(private cdref: ChangeDetectorRef, private tourService: TourService,
      private countryService: CountryService, private hotelService: HotelService) { }
 
   ngOnInit() {
     this.getTours()
+    // this.getToursBySearch()
     this.getCountries()
     this.getHotels()
   }
@@ -50,6 +55,17 @@ export class TourComponent implements OnInit {
     }
 }
 
+compareFn(val1, val2): boolean {
+  return val1 && val2 ? val1.id === val2.id : val1 === val2;
+}
+
+getToursBySearch(tourFormData: TourForm): void {
+  this.tourService.getToursByCriteria(tourFormData)
+  .then(tours => {
+    this.tours = tours });
+
+}
+
 getCountries() : void {
  this.countryService.getCountries().then(countries => this.countries = countries);
 }
@@ -62,6 +78,10 @@ getHotels() : void {
     var keys = Object.keys(this.tourType);
     return keys.slice(keys.length / 2);
 }
+
+editSearhing() {
+  this.isSearching = !this.isSearching;
+   }
 
   getTours(): void {
     this.tourService.getTours()
