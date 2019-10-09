@@ -106,7 +106,8 @@ export class TourService {
     // Observable.throw(error.message || error).toPromise();
     
     if(error.message){
-    alert(error.message);
+    // alert(error.message);
+    alert(error.error.error_description)
     }
     return Promise.reject(error.message || error);
   }

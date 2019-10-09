@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 
 import { CountryComponent } from './country/country.component';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { CountryService } from './country/country.service';
 import { HotelService } from './hotel/hotel.service';
 import { TourService } from './tour/tour.service';
-// import { UserComponent } from './user/user.component';
+import { UserComponent } from './user/user.component';
+import { UserService } from './user/user.service';
 import { HotelComponent } from './hotel/hotel.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigatorComponent } from './navigator/navigator.component';
@@ -20,21 +21,25 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { CustomTableComponent } from './custom-table/custom-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TourComponent } from './tour/tour.component';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+import { BasicAuthInterceptService } from './service/basic-auth-intercept.service';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     CountryComponent,
-    // UserComponent,
+    UserComponent,
     HotelComponent,
     NavigatorComponent,
-    CustomTableComponent,
-    TourComponent
+    TourComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +55,18 @@ import { TourComponent } from './tour/tour.component';
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    ReactiveFormsModule,
   ],
-  providers: [CountryService, HotelService, TourService],
+  providers: [
+    CountryService,
+    HotelService,
+    TourService,
+    UserService,
+  // {
+  //   provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptService, multi:true 
+  // }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

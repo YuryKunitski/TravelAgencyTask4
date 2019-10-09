@@ -21,6 +21,10 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>TravelAgency</span>
+      <ul class="navbar-nav" style="margin-left: auto; margin-right: 0">
+      <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
+    <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
+  </ul>
     </mat-toolbar>
     <!-- Add Content Here -->
   </mat-sidenav-content>
