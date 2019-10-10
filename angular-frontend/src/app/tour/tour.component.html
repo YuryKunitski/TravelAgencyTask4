@@ -112,7 +112,7 @@
             <button (click)="getToursBySearch(tourForm)" class="btn btn btn-outline-success">Search</button>
     </div>
 
-    <br><input class="btn btn-success" *ngIf="isNewTour == false && editing == false"
+    <br><input class="btn btn-success" *ngIf="isNewTour == false && editing == false && userService.isAdmin()"
     type="button" value="Add tour" (click)="addTour()" />
 
     <table class="table table-striped">
@@ -126,8 +126,10 @@
                 <td>Hotel</td>
                 <td>Country</td>
                 <td>Tour type</td>
-                <td></td>
-                <td></td>
+            <!-- <div *ngIf="userService.isAdmin()"> -->
+                <td *ngIf="userService.isAdmin()"></td>
+                <td *ngIf="userService.isAdmin()"></td>
+            <!-- </div> -->
             </tr>
         </thead>
         <tbody>
@@ -141,30 +143,30 @@
 
     <!--шаблон для чтения-->
 <ng-template #readOnlyTemplate let-tour>
-            <!-- <td>{{tour.photo}}</td> -->
             <td><img src="assets/images/tour_photo.jpg" alt="photo" width="100"/></td>
             <td>{{tour.date}}</td>
-             <!-- <td><a href="mailto:{{ hotel.duration }}">{{ hotel.duration }}</a></td>  -->
             <td>{{tour.duration}}</td>
             <td>{{tour.description}}</td>
             <td>{{tour.cost}}</td>
             <td>{{tour.hotel.name}} {{tour.hotel.stars}}*</td>
             <td>{{tour.country.name}}</td>
             <td>{{tour.tour_type}}</td>
-            <td>
+        <!-- <div *ngIf="userService.isAdmin()">     -->
+            <td *ngIf="userService.isAdmin()">
                 <span class="entity-actions" style="cursor: pointer">
                     <a *ngIf="isNewTour == false" (click)="editTour(tour)">
                         <i class="material-icons edit">edit</i>
                     </a>
                 </span>
             </td>
-            <td>
+            <td *ngIf="userService.isAdmin()">
                 <span class="entity-actions" style="cursor: pointer">
                     <a (click)="deleteTour(tour.id)">
                         <i class="material-icons delete">delete</i>
                     </a>
                 </span>
             </td>
+        <!-- </div> -->
     </ng-template>
 
     <!--шаблон для редактирования-->

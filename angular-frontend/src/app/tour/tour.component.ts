@@ -8,6 +8,7 @@ import { CountryService } from '../country/country.service';
 import { Hotel } from '../hotel/hotel';
 import { HotelService } from '../hotel/hotel.service';
 import { TourForm } from './tour-form';
+import { UserService } from '../user/user.service';
 
 
 @Component({
@@ -32,8 +33,11 @@ export class TourComponent implements OnInit {
   isSearching: boolean = false;
   tourForm: TourForm = new TourForm();
 
-  constructor(private cdref: ChangeDetectorRef, private tourService: TourService,
-     private countryService: CountryService, private hotelService: HotelService) { }
+  constructor(private cdref: ChangeDetectorRef,
+              private tourService: TourService,
+              private countryService: CountryService,
+              private hotelService: HotelService,
+              private userService: UserService) { }
 
   ngOnInit() {
     this.getTours()
@@ -98,7 +102,7 @@ editSearhing() {
     if (this.isNewTour){
     this.tourService.createTour(this.editingTour)
       .then(createdTour => {        
-        tourForm.reset();
+       
         this.tours.push(createdTour)
       });
       this.clearEditing();

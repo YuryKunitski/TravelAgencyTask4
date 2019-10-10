@@ -3,7 +3,6 @@ import { User } from './user';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs/index';   
-// import {ApiResponse} from "../model/api.response";
 
 @Injectable()
 export class UserService {
@@ -21,24 +20,47 @@ export class UserService {
     return this.http.post(this.baseUrl + 'oauth/token', loginPayload, {headers});
   }
 
-  // getUsers() {
-  //   return this.http.get(this.baseUrl + 'user?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
-  // }
+  isUserLoggedIn() {
+    let token = window.sessionStorage.getItem('token')
+    console.log(!(token === null)+"---------------- UserService")
+    return !(token === null)
+  }
+
+  logOut() {
+    window.sessionStorage.removeItem('token')
+    window.sessionStorage.removeItem('login')
+    window.sessionStorage.removeItem('role')
+  }
+
+  getUserLogin() {
+    return window.sessionStorage.getItem('login');
+  }
+
+  getUserRole() {
+    return window.sessionStorage.getItem('role');
+  }
+
+  isAdmin(){
+    return window.sessionStorage.getItem('role') == 'ADMIN';
+  }
 
   getUsers(): Promise<User[]> {
     
     return this.http.get(this.baseUrl + 'user/get_all?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
       .toPromise()
-    //   .then(response => response.json() as user[])
       .catch(this.handleError);
   }
 
-  getUserById(id: string) {
-    return this.http.get(this.baseUrl + 'user/get_by_id?id=' + id + '&access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
+  getUserById(id: string): Promise<User> {
+    return this.http.get(this.baseUrl + 'user/get_by_id?id=' + id + '&access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      .toPromise()
+      .catch(this.handleError);
   }
 
-  getUserByName(username: string) {
-    return this.http.get(this.baseUrl + 'user/get_by_username?username=' + username + '&access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token);
+  getUserByName(username: string): Promise<User> {
+    return this.http.get(this.baseUrl + 'user/get_by_username?username=' + username + '&access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      .toPromise()
+      .catch(this.handleError);
   }
 
   createMember(userData: User): Promise<User> {

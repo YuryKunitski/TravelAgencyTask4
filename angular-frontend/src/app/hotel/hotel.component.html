@@ -1,6 +1,6 @@
 <div class="container">
         <h1 class="page-name">Hotels</h1>
-        <input *ngIf="isNewHotel == false && editing == false" type="button" value="Add hotel" class="btn btn-success" (click)="addHotel()" />
+        <input *ngIf="isNewHotel == false && editing == false && userService.isAdmin()" type="button" value="Add hotel" class="btn btn-success" (click)="addHotel()" />
         <table class="table table-striped">
             <thead>
                 <tr style="color: rgb(25, 102, 15)">
@@ -10,8 +10,8 @@
                     <td>Latitude</td>
                     <td>Longitude</td>
                     <td>Feature</td>
-                    <td></td>
-                    <td></td>
+                    <td *ngIf="userService.isAdmin()"></td>
+                    <td *ngIf="userService.isAdmin()"></td>
                 </tr>
             </thead>
             <tbody>
@@ -30,14 +30,14 @@
     <td>{{hotel.latitude}}</td>
     <td>{{hotel.longitude}}</td>
     <td>{{hotel.features}}</td>
-    <td>
+    <td *ngIf="userService.isAdmin()">
     <span class="entity-actions" style="cursor: pointer">
             <a *ngIf="isNewHotel == false" (click)="editHotel(hotel)">
               <i class="material-icons edit">edit</i>
             </a>
     </span>
       </td>
-      <td>
+      <td *ngIf="userService.isAdmin()">
           <span class="entity-actions" style="cursor: pointer">
         <a (click)="deleteHotel(hotel.id)">
           <i class="material-icons delete">delete</i>

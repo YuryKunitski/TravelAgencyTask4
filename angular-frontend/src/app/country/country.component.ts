@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Country } from './country';
 import { NgForm } from '@angular/forms';
 import { CountryService } from './country.service';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'country',
@@ -14,7 +15,8 @@ export class CountryComponent implements OnInit {
   editing: boolean = false;
   editingCountry: Country = new Country();
 
-  constructor(private countryService: CountryService) {}
+  constructor(private countryService: CountryService,
+              private userService: UserService) {}
 
   ngOnInit(): void {
     this.getCountries();

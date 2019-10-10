@@ -26,13 +26,13 @@ export class AuthenticationService {
       );
   }
 
-  isUserLoggedIn() {
-    let user = sessionStorage.getItem('username')
-    console.log(!(user === null))
-    return !(user === null)
-  }
+  // isUserLoggedIn() {
+  //   let user = sessionStorage.getItem('username')
+  //   console.log(!(user === null)+"------------- AuthenticationService")
+  //   return !(user === null)
+  // }
 
-  logOut() {
-    sessionStorage.removeItem('username')
-  }
+  // logOut() {
+  //   sessionStorage.removeItem('username')
+  // }
 }

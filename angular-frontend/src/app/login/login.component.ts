@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { AuthenticationService } from '../service/authentication.service';
 import { HttpParams } from '@angular/common/http';
 import { UserService } from '../user/user.service';
+import { NavigatorComponent } from '../navigator/navigator.component';
 
 
 @Component({
@@ -30,19 +31,27 @@ export class LoginComponent implements OnInit {
       .set('grant_type', 'password');
 
     this.userService.login(body.toString()).subscribe(data => {
-      
-      console.log("JSON.stringify(data) - "+JSON.stringify(data) +"------------------------------");
-
+ 
       window.sessionStorage.setItem('token', JSON.stringify(data));
 
-      console.log(window.sessionStorage.getItem('token')+"------------------------------");
+      this.userService.getUserByName(body.get('username'))
+      .then(user => {
+          window.sessionStorage.setItem('role', user.role.toString());
+          window.sessionStorage.setItem('login', user.username);
+      
+          console.log("Access token from session - " + window.sessionStorage.getItem('token'));
+          console.log("User name from session - " + window.sessionStorage.getItem('login'))
+          console.log("User role from session - " + window.sessionStorage.getItem('role'));
+      });
 
       this.router.navigate(['']);
+    
     }, error => {
       this.invalidLogin = true
         alert(error.message)
         alert(error.error_description)
     });
+    
   }            
 
   ngOnInit() {

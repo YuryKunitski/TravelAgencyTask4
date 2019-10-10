@@ -3,6 +3,7 @@ import { Hotel, Feature } from './hotel';
 import { NgForm } from '@angular/forms';
 import { HotelService } from './hotel.service';
 import {TemplateRef, ViewChild} from '@angular/core';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-hotel',
@@ -21,7 +22,9 @@ export class HotelComponent implements OnInit {
   editingHotel: Hotel = new Hotel();
   features = Feature
 
-  constructor(private cdref: ChangeDetectorRef, private hotelService: HotelService) {}
+  constructor(private cdref: ChangeDetectorRef,
+              private hotelService: HotelService,
+              private userService: UserService) {}
 
   ngOnInit(): void {
     this.getHotels();
@@ -62,7 +65,7 @@ addHotel() {
     // if(this.editingHotel.id == null){
     this.hotelService.createHotel(this.editingHotel)
       .then(createHotel => {        
-        hotelForm.reset();
+        // hotelForm.reset();
         // this.newHotel = new Hotel();
         this.hotels.push(createHotel)
       });
