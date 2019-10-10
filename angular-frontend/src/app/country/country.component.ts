@@ -14,6 +14,8 @@ export class CountryComponent implements OnInit {
   newCountry: Country = new Country();
   editing: boolean = false;
   editingCountry: Country = new Country();
+  page: number = 1;
+  count: number = 4;
 
   constructor(private countryService: CountryService,
               private userService: UserService) {}

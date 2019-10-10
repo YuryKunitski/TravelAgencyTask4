@@ -27,7 +27,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let country of countries">
+           
+            <tr *ngFor="let country of countries | paginate: { itemsPerPage: count, currentPage: page }">
                 <td>
                     <div class="entity-row" *ngIf="!editing || editingCountry.id != country.id"> 
                         <span class="entity-name">
@@ -42,9 +43,7 @@
                 </td>
                 <td *ngIf="userService.isAdmin()">
                     <div class="entity-row" *ngIf="!editing || editingCountry.id != country.id"> 
-                        <!-- <span class="entity-name">
-                         {{country.name}}
-                       </span> -->
+                        
                        <span class="entity-actions" style="cursor: pointer">
                            <a (click)="editCountry(country)">
                              <i class="material-icons edit">edit</i>
@@ -56,8 +55,6 @@
                     </div>
 
                     <div class="entity-edit" *ngIf="editing && editingCountry.id === country.id">
-                        <!-- <input  type="text" 
-                         [(ngModel)]="editingCountry.name" required> -->
                         <span class="edit-actions-custom" style="cursor: pointer">
                             <a (click)="updateCountry(editingCountry)">
                               <i class="material-icons">done</i>
@@ -70,16 +67,13 @@
                 </td>
             </tr>
         </tbody>
+    </table>
         
+<!--Including the pagination control.-->
+<div class="text-right">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
 
-
-        
-
-
-
-      <!-- </li> -->
-    <!-- </ol> -->
     <div class="no-entities" *ngIf="countries?.length==0">
         <p>No entities Found!</p>
     </div>
-<!-- </div> -->

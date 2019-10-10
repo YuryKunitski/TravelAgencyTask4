@@ -29,6 +29,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { BasicAuthInterceptService } from './service/basic-auth-intercept.service';
 import {ReactiveFormsModule} from "@angular/forms";
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -57,15 +58,13 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatPaginatorModule,
     MatSortModule,
     ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [
     CountryService,
     HotelService,
     TourService,
-    UserService,
-  // {
-  //   provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptService, multi:true 
-  // }
+    UserService
   ],
   bootstrap: [AppComponent]
 })

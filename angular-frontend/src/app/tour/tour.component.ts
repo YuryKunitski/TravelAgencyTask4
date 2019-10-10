@@ -32,6 +32,8 @@ export class TourComponent implements OnInit {
   hotels: Hotel[];
   isSearching: boolean = false;
   tourForm: TourForm = new TourForm();
+  page: number = 1;
+  count: number = 4;
 
   constructor(private cdref: ChangeDetectorRef,
               private tourService: TourService,

@@ -21,6 +21,8 @@ export class HotelComponent implements OnInit {
   isNewHotel: boolean = false;
   editingHotel: Hotel = new Hotel();
   features = Feature
+  page: number = 1;
+  count: number = 4;
 
   constructor(private cdref: ChangeDetectorRef,
               private hotelService: HotelService,

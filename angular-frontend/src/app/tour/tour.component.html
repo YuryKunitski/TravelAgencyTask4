@@ -133,13 +133,18 @@
             </tr>
         </thead>
         <tbody>
-                <tr *ngFor="let tour of tours">
+                <tr *ngFor="let tour of tours  | paginate: { itemsPerPage: count, currentPage: page }">
                         <ng-template [ngTemplateOutlet]="loadTemplate(tour)" 
                                     [ngTemplateOutletContext]="{ $implicit: tour}">
                         </ng-template>
                 </tr>
         </tbody>
     </table>
+
+    <!--Including the pagination control.-->
+      <div class="text-right" >
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
 
     <!--шаблон для чтения-->
 <ng-template #readOnlyTemplate let-tour>

@@ -14,14 +14,19 @@
                     <td *ngIf="userService.isAdmin()"></td>
                 </tr>
             </thead>
-            <tbody>
-                <tr *ngFor="let hotel of hotels">
+            <tbody> <!-- <tr *ngFor="let e of employeedata | paginate: { itemsPerPage: count, currentPage: p }"> -->
+                <tr *ngFor="let hotel of hotels | paginate: { itemsPerPage: count, currentPage: page }">
                     <ng-template [ngTemplateOutlet]="loadTemplate(hotel)" 
                                 [ngTemplateOutletContext]="{ $implicit: hotel}">
                     </ng-template>
                 </tr>
             </tbody>
         </table>
+
+        <!--Including the pagination control.-->
+<div class="text-right">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
           <!--шаблон для чтения-->
 <ng-template #readOnlyTemplate let-hotel>
     <td>{{hotel.name}}</td>
@@ -47,7 +52,6 @@
 </ng-template>
 
 <!--шаблон для редактирования-->
-<!-- <form #hotelForm="ngForm" > -->
 <ng-template #editTemplate>
     <td>
         <input type="text" [(ngModel)]="editingHotel.name" class="form-control" name="name"
@@ -124,9 +128,9 @@
         </a>
     </span>
       </td>
-
 </ng-template>
-<!-- </form> -->
+
+
 
         <div class="no-entities" *ngIf="hotels?.length==0">
             <p>No entities Found!</p>
