@@ -14,7 +14,7 @@ import { UserService } from '../user/user.service';
 @Component({
   selector: 'app-tour',
   templateUrl: './tour.component.html',
-  // styleUrls: ['./tour.component.css']
+  styleUrls: ['./tour.component.css']
 })
 export class TourComponent implements OnInit {
 
@@ -23,7 +23,6 @@ export class TourComponent implements OnInit {
    @ViewChild('editTemplate', {static: false}) editTemplate: TemplateRef<any>;
 
   tours: Tour[];
-  // newTour: Tour = new Tour();
   editing: boolean = false;
   isNewTour: boolean = false;
   editingTour: Tour = new Tour();
@@ -34,6 +33,8 @@ export class TourComponent implements OnInit {
   tourForm: TourForm = new TourForm();
   page: number = 1;
   count: number = 4;
+  key: string;
+  reverse: boolean = false;
 
   constructor(private cdref: ChangeDetectorRef,
               private tourService: TourService,
@@ -43,9 +44,14 @@ export class TourComponent implements OnInit {
 
   ngOnInit() {
     this.getTours()
-    // this.getToursBySearch()
     this.getCountries()
     this.getHotels()
+  }
+
+  sort(key){
+    this.key = key;
+    this.reverse = !this.reverse;
+    console.log("reverse - " + this.reverse)
   }
 
   ngAfterContentChecked() {

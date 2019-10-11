@@ -23,6 +23,8 @@ export class HotelComponent implements OnInit {
   features = Feature
   page: number = 1;
   count: number = 4;
+  key: string;
+  reverse: boolean = false;
 
   constructor(private cdref: ChangeDetectorRef,
               private hotelService: HotelService,
@@ -30,6 +32,12 @@ export class HotelComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHotels();
+  }
+
+  sort(key){
+    this.key = key;
+    this.reverse = !this.reverse;
+    console.log("reverse - " + this.reverse)
   }
 
   ngAfterContentChecked() {

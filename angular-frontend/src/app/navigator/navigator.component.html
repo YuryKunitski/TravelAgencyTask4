@@ -21,17 +21,17 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>TravelAgency</span>
-      <ul class="navbar-nav" style="margin-left: auto; margin-right: 0">
-      <!-- <li> -->
-        <div *ngIf="userService.isUserLoggedIn()">
-            <span >{{userService.isAdmin()}} </span>
-        <span >{{userService.getUserLogin()}}</span>
-        <!-- <span >role - {{userRole}}</span> -->
-      </div>
-        <!-- </li>  -->
-      <li><a *ngIf="!userService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
-      <li><a *ngIf="userService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
+   <ul class="navbar-nav list-inline" style="margin-left: auto; margin-right: 0">
+          
+      <li><span *ngIf="userService.isUserLoggedIn()">
+        <i class="fas fa-user"></i> {{userService.getUserLogin()}}</span>
+      </li>
+      <li><a *ngIf="!userService.isUserLoggedIn()" routerLink="/login">Login</a></li>
+      <li><a *ngIf="userService.isUserLoggedIn()" routerLink="/logout">LogOut</a></li>
+
+    
   </ul>
+
     </mat-toolbar>
     <!-- Add Content Here -->
   </mat-sidenav-content>

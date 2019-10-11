@@ -22,13 +22,15 @@
     <table class="table table-striped">
         <thead>
             <tr style="color: rgb(25, 102, 15)">
-                <td>Name</td>
+                <th style="cursor: pointer" (click)="sort('name')">Country's name
+                  <i class="fas fa-sort" ></i>
+                </th>
                 <td *ngIf="userService.isAdmin()"></td>
             </tr>
         </thead>
         <tbody>
            
-            <tr *ngFor="let country of countries | paginate: { itemsPerPage: count, currentPage: page }">
+            <tr *ngFor="let country of countries |  orderBy: key : reverse | paginate: { itemsPerPage: count, currentPage: page }">
                 <td>
                     <div class="entity-row" *ngIf="!editing || editingCountry.id != country.id"> 
                         <span class="entity-name">

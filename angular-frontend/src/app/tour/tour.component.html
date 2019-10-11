@@ -118,22 +118,30 @@
     <table class="table table-striped">
         <thead>
             <tr style="color: rgb(25, 102, 15)">
-                <td>Photo</td>
-                <td>Date</td>
-                <td>Duration</td>
-                <td>Description</td>
-                <td>Cost</td>
-                <td>Hotel</td>
-                <td>Country</td>
-                <td>Tour type</td>
+                <th>Photo</th>
+                <th style="cursor: pointer" (click)="sort('date')">Date
+                    <i class="fas fa-sort" ></i>
+                </th>
+                <th style="cursor: pointer" (click)="sort('duration')">Duration
+                    <i class="fas fa-sort" ></i>
+                </th>
+                <th>Description</th>
+                <th style="cursor: pointer" (click)="sort('cost')">Cost
+                    <i class="fas fa-sort" ></i>
+                </th>
+                <th>Hotel</th>
+                <th>Country</th>
+                <th style="cursor: pointer" (click)="sort('tour_type')">Tour type
+                    <i class="fas fa-sort" ></i>
+                </th>
             <!-- <div *ngIf="userService.isAdmin()"> -->
-                <td *ngIf="userService.isAdmin()"></td>
-                <td *ngIf="userService.isAdmin()"></td>
+                <th *ngIf="userService.isAdmin()"></th>
+                <th *ngIf="userService.isAdmin()"></th>
             <!-- </div> -->
             </tr>
         </thead>
         <tbody>
-                <tr *ngFor="let tour of tours  | paginate: { itemsPerPage: count, currentPage: page }">
+                <tr *ngFor="let tour of tours |  orderBy: key : reverse | paginate: { itemsPerPage: count, currentPage: page }">
                         <ng-template [ngTemplateOutlet]="loadTemplate(tour)" 
                                     [ngTemplateOutletContext]="{ $implicit: tour}">
                         </ng-template>

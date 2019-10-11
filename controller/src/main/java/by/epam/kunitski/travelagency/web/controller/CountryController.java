@@ -3,8 +3,13 @@ package by.epam.kunitski.travelagency.web.controller;
 import by.epam.kunitski.travelagency.dao.entity.Country;
 import by.epam.kunitski.travelagency.service.CountryService;
 import by.epam.kunitski.travelagency.service.exeption.EntityNotFoundException;
+import com.google.common.collect.Lists;
 import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -38,6 +43,13 @@ public class CountryController {
     public ResponseEntity<List<Country>> getAllCountry() {
 
         return ResponseEntity.ok(countryService.getAll());
+    }
+
+    @GetMapping("get_all_pagination")
+    public List<Country> getAllCountryByPagination(@RequestParam Integer page) {
+        Pageable pageable = PageRequest.of(page, 3, Sort.by("name"));
+        Page<Country> countryPage = countryService.findAll(pageable);
+        return Lists.newArrayList(countryPage);
     }
 
     @Secured("ROLE_ADMIN")

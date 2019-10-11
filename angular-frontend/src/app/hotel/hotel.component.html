@@ -4,18 +4,23 @@
         <table class="table table-striped">
             <thead>
                 <tr style="color: rgb(25, 102, 15)">
-                    <td>Name</td>
-                    <td>Stars</td>
-                    <td>Website</td>
-                    <td>Latitude</td>
-                    <td>Longitude</td>
-                    <td>Feature</td>
+                    <th style="cursor: pointer" (click)="sort('name')">Name
+                      <i class="fas fa-sort" ></i>
+                    </th>
+                    <th style="cursor: pointer" (click)="sort('stars')">Stars
+                      <i class="fas fa-sort" ></i>
+                    </th>
+                    <th>Website</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th style="cursor: pointer" (click)="sort('features')">Feature
+                      <i class="fas fa-sort" ></i></th>
                     <td *ngIf="userService.isAdmin()"></td>
                     <td *ngIf="userService.isAdmin()"></td>
                 </tr>
             </thead>
             <tbody> <!-- <tr *ngFor="let e of employeedata | paginate: { itemsPerPage: count, currentPage: p }"> -->
-                <tr *ngFor="let hotel of hotels | paginate: { itemsPerPage: count, currentPage: page }">
+                <tr *ngFor="let hotel of hotels |  orderBy: key : reverse | paginate: { itemsPerPage: count, currentPage: page }">
                     <ng-template [ngTemplateOutlet]="loadTemplate(hotel)" 
                                 [ngTemplateOutletContext]="{ $implicit: hotel}">
                     </ng-template>

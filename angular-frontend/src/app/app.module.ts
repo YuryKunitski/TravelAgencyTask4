@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 
 import { CountryComponent } from './country/country.component';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 import { CountryService } from './country/country.service';
 import { HotelService } from './hotel/hotel.service';
 import { TourService } from './tour/tour.service';
@@ -27,9 +27,9 @@ import { MatSortModule } from '@angular/material/sort';
 import { TourComponent } from './tour/tour.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
-import { BasicAuthInterceptService } from './service/basic-auth-intercept.service';
-import {ReactiveFormsModule} from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 @NgModule({
   declarations: [
@@ -44,6 +44,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   ],
   imports: [
     BrowserModule,
+    Ng2OrderModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

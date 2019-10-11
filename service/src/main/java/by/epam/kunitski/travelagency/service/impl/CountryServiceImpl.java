@@ -5,6 +5,8 @@ import by.epam.kunitski.travelagency.dao.repository.CountryDAO;
 import by.epam.kunitski.travelagency.service.CountryService;
 import by.epam.kunitski.travelagency.service.exeption.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,8 +15,14 @@ import java.util.Optional;
 @Service
 public class CountryServiceImpl implements CountryService {
 
+
     @Autowired
     private CountryDAO countryDAO;
+
+    @Override
+    public Page<Country> findAll(Pageable pageable) {
+        return countryDAO.findAll(pageable);
+    }
 
     @Override
     public Country add(Country country) {

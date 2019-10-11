@@ -16,12 +16,19 @@ export class CountryComponent implements OnInit {
   editingCountry: Country = new Country();
   page: number = 1;
   count: number = 4;
+  key: string = name;
+  reverse: boolean = false;
 
   constructor(private countryService: CountryService,
               private userService: UserService) {}
 
   ngOnInit(): void {
     this.getCountries();
+  }
+
+  sort(key){
+    this.key = key;
+    this.reverse = !this.reverse;
   }
 
   getCountries(): void {
