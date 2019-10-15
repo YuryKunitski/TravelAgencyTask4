@@ -107,7 +107,7 @@ export class TourService {
     
     if(error.message){
     // alert(error.message);
-    alert(error.error.error_description)
+    alert(error.message)
     }
     return Promise.reject(error.message || error);
   }

@@ -7,8 +7,10 @@ import { TourComponent } from './tour/tour.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AuthGaurdService } from './service/auth-gaurd.service';
+import{ RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
+  { path: 'registration', component: RegistrationComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent, canActivate:[AuthGaurdService] },
   { path: 'countries', component: CountryComponent, canActivate:[AuthGaurdService] },

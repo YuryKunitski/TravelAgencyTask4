@@ -46,9 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/oauth/token").permitAll()
                 .antMatchers("/review/**", "/country/get_by_id", "/country/get_all",
-                        "/hotel/get_by_id", "/hotel/get_all", "/tour/get_by_id", "/tour/get_all").permitAll()
-                .and()
-                .authorizeRequests().anyRequest().authenticated()
-                .and();
+                        "/hotel/get_by_id", "/hotel/get_all", "/tour/get_by_id", "/tour/get_all", "/user/get_all").permitAll()
+//                .and()
+//                .authorizeRequests().anyRequest().authenticated()
+                ;
     }
 }

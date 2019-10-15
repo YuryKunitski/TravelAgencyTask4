@@ -1,21 +1,9 @@
-<!-- <div class="container">
-    <div>
-      User Name : <input type="text" name="username" [(ngModel)]="username">
-      Password : <input type="password" name="password" [(ngModel)]="password">
-    </div>
-    <button (click)=checkLogin() class="btn btn-success">
-      Login
-    </button>
-  </div> -->
-
-  
-  <div class="row">
-
+<div class="row">
     <div style="margin-left: 300px; margin-right: auto" class="col-md-6 login-container">
       <h2 style="margin-left: 500px; margin-right: auto">Login </h2>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="username">UserName:</label>
+          <label for="username">User Name:</label>
           <input type="text" class="form-control" formControlName="username" id="username" autocomplete="off">
           <div class="error" *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched">Username is required</div>
         </div>

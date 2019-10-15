@@ -26,6 +26,7 @@
       <li><span *ngIf="userService.isUserLoggedIn()">
         <i class="fas fa-user"></i> {{userService.getUserLogin()}}</span>
       </li>
+      <li><a *ngIf="!userService.isUserLoggedIn()" routerLink="/registration">Registration</a></li>
       <li><a *ngIf="!userService.isUserLoggedIn()" routerLink="/login">Login</a></li>
       <li><a *ngIf="userService.isUserLoggedIn()" routerLink="/logout">LogOut</a></li>
 

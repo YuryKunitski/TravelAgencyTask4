@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { AuthenticationService } from '../service/authentication.service';
 import { HttpParams } from '@angular/common/http';
 import { UserService } from '../user/user.service';
-import { NavigatorComponent } from '../navigator/navigator.component';
 
 
 @Component({
@@ -15,7 +13,7 @@ import { NavigatorComponent } from '../navigator/navigator.component';
 export class LoginComponent implements OnInit {
   
   loginForm: FormGroup;
-  invalidLogin: boolean = false
+  invalidLogin: boolean = false;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
@@ -28,7 +26,7 @@ export class LoginComponent implements OnInit {
     const body = new HttpParams()
       .set('username', this.loginForm.controls.username.value)
       .set('password', this.loginForm.controls.password.value)
-      .set('grant_type', 'password');
+      .set('grant_type', 'password'); //  GRANT_TYPE = "password";
 
     this.userService.login(body.toString()).subscribe(data => {
  
@@ -47,12 +45,11 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['']);
     
     }, error => {
-      this.invalidLogin = true
+        this.invalidLogin = true
         alert(error.message)
         alert(error.error_description)
     });
-    
-  }            
+  }    
 
   ngOnInit() {
     window.sessionStorage.removeItem('token');
@@ -62,17 +59,4 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  // checkLogin() {
-  //   (this.loginservice.authenticate(this.username, this.password).subscribe(
-  //     data => {
-  //       this.router.navigate([''])
-  //       this.invalidLogin = false
-  //       },
-  //     error => {
-  //       this.invalidLogin = true
-
-  //       }
-  //     )
-  //   );
-  // }
 }

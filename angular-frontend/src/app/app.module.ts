@@ -30,6 +30,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     NavigatorComponent,
     TourComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

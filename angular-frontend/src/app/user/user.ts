@@ -8,5 +8,4 @@ export class User {
  export enum Role {
       MEMBER,
       ADMIN
-  }
-  
+  }  

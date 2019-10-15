@@ -55,7 +55,7 @@ public class UserController {
         return ResponseEntity.ok(userService.findUserByUsername(username));
     }
 
-    @Secured("ROLE_ADMIN")
+//    @Secured("ROLE_ADMIN")
     @GetMapping("get_all")
     public ResponseEntity<List<User>> getAllUser() {
 

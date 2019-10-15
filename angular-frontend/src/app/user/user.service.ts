@@ -3,16 +3,17 @@ import { User } from './user';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs/index';   
+import { FormGroup } from '@angular/forms';
 
 @Injectable()
 export class UserService {
-  private username='client-id';
-  private password='client-secret';
+  // private username='client-id';
+  // private password='client-secret';
   private baseUrl = 'http://localhost:8080/';
 
   constructor(private http:HttpClient) {}
 
-  login(loginPayload) {
+  login(loginPayload: string) {
     const headers = {
       'Authorization': 'Basic ' + btoa('client-id:client-secret'),
       'Content-type': 'application/x-www-form-urlencoded'
@@ -20,10 +21,19 @@ export class UserService {
     return this.http.post(this.baseUrl + 'oauth/token', loginPayload, {headers});
   }
 
+  // registration(loginPayload: string) {
+  //   const headers = {
+  //     'Authorization': 'Basic ' + btoa('client-id:client-secret'),
+  //     'Content-type': 'application/x-www-form-urlencoded'
+  //   }
+  //   return this.http.post(this.baseUrl + 'oauth/token', loginPayload, {headers});
+  // }
+
   isUserLoggedIn() {
-    let token = window.sessionStorage.getItem('token')
+    let token = window.sessionStorage.getItem('token');
+    let login = window.sessionStorage.getItem('login');
     console.log(!(token === null)+"---------------- UserService")
-    return !(token === null)
+    return (token != null && login != null)
   }
 
   logOut() {
@@ -31,6 +41,15 @@ export class UserService {
     window.sessionStorage.removeItem('login')
     window.sessionStorage.removeItem('role')
   }
+
+  getUserByForm(registerForm: FormGroup){
+    let user: User = new User; 
+     
+     user.username = registerForm.controls.username.value;
+     user.password = registerForm.controls.password.value;
+
+     return user;
+    }
 
   getUserLogin() {
     return window.sessionStorage.getItem('login');
