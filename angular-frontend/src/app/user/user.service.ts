@@ -16,23 +16,15 @@ export class UserService {
   login(loginPayload: string) {
     const headers = {
       'Authorization': 'Basic ' + btoa('client-id:client-secret'),
-      'Content-type': 'application/x-www-form-urlencoded'
+      'Content-type': 'application/x-www-form-urlencoded',
     }
     return this.http.post(this.baseUrl + 'oauth/token', loginPayload, {headers});
   }
 
-  // registration(loginPayload: string) {
-  //   const headers = {
-  //     'Authorization': 'Basic ' + btoa('client-id:client-secret'),
-  //     'Content-type': 'application/x-www-form-urlencoded'
-  //   }
-  //   return this.http.post(this.baseUrl + 'oauth/token', loginPayload, {headers});
-  // }
-
   isUserLoggedIn() {
     let token = window.sessionStorage.getItem('token');
     let login = window.sessionStorage.getItem('login');
-    console.log(!(token === null)+"---------------- UserService")
+    // console.log(!(token === null)+"---------------- UserService")
     return (token != null && login != null)
   }
 

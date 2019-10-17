@@ -22,12 +22,22 @@ export class RegistrationComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      // confirmPassword:['', Validators.required]
+      confirmPassword: ['', Validators.required]
     });
   }
+  // user.username = registerForm.controls.username.value;
+  // user.password = registerForm.controls.password.value;
+
+  confirmPasswords(group: FormGroup): boolean { // here we have the 'passwords' group
+  let pass = group.get('password').value;
+  let confirmPass = group.get('confirmPassword').value;
+
+  return pass === confirmPass ? true : false;     
+}
 
     onSubmitReg(){
-      if (this.registerForm.invalid) {
+      if (this.registerForm.invalid || !this.confirmPasswords(this.registerForm) ) {
+        alert('Invalid registration form')
         return;
       }
   
@@ -52,9 +62,6 @@ export class RegistrationComponent implements OnInit {
           }, error => {
           alert(error.message)
         });
-  
-        
-      
       }, error => {
           this.invalidRegisterForm = true
           alert(error.message)

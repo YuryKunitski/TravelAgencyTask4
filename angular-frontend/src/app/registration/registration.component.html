@@ -1,25 +1,31 @@
-<div class="row">
-        <div style="margin-left: 300px; margin-right: auto" class="col-md-6 login-container">    
-        <h2 class="text-center">Registration</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Registration</h5>
+
         <form [formGroup]="registerForm" (ngSubmit)="onSubmitReg()">
-          <div class="form-group">
-            <label for="username">User Name:</label>
+          
+          <div class="form-label-group">
             <input type="text" formControlName="username" placeholder="username" name="username" class="form-control" id="username">
-            <div class="error" *ngIf="registerForm.controls['username'].hasError('required') && registerForm.controls['username'].touched">Username is required</div>
+            <label for="username">User Name:</label>
+            <div class="error" style="color: red" *ngIf="registerForm.controls['username'].hasError('required') && registerForm.controls['username'].touched">Username is required</div>
           </div>
       
-          <div class="form-group">
-            <label for="password">Password:</label>
+          <div class="form-label-group">
             <input type="password" formControlName="password" placeholder="password" name="password" class="form-control" id="password">
-            <div class="error" *ngIf="registerForm.controls['password'].hasError('required') && registerForm.controls['password'].touched">Password is required</div>
+            <label for="password">Password:</label>
+            <div class="error" style="color: red" *ngIf="registerForm.controls['password'].hasError('required') && registerForm.controls['password'].touched">Password is required</div>
           </div>
       
-          <!-- <div class="form-group">
+          <div class="form-label-group">
+            <input type="password" formControlName="confirmPassword" placeholder="Confirm password" name="confirmPassword" class="form-control" id="confirmPassword">
             <label for="confirmPassword">Confirm password:</label>
-            <input formControlName="confirmPassword" placeholder="Confirm password" name="confirmPassword" class="form-control" id="confirmPassword">
-          </div> -->
+            <div class="error" style="color: red" *ngIf="registerForm.controls['confirmPassword'].hasError('required') && registerForm.controls['confirmPassword'].touched">Confirm password is required</div>
+          </div>
       
-          <button class="btn btn-success">Registration</button>
+          <button class="btn btn-lg btn-primary btn-block text-uppercase">Registration</button>
           <div *ngIf="invalidRegisterForm" class="error">
             <div>Invalid credentials.</div>
           </div>

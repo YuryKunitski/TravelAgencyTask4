@@ -157,10 +157,10 @@
     <!--шаблон для чтения-->
 <ng-template #readOnlyTemplate let-tour>
             <td><img src="assets/images/tour_photo.jpg" alt="photo" width="100"/></td>
-            <td>{{tour.date}}</td>
+            <td>{{tour.date | date}}</td>
             <td>{{tour.duration}}</td>
             <td>{{tour.description}}</td>
-            <td>{{tour.cost}}</td>
+            <td>{{tour.cost | currency}}</td>
             <td>{{tour.hotel.name}} {{tour.hotel.stars}}*</td>
             <td>{{tour.country.name}}</td>
             <td>{{tour.tour_type}}</td>
@@ -184,7 +184,7 @@
 
     <!--шаблон для редактирования-->
 <ng-template #editTemplate >
-                <td><img src="assets/images/tour_photo.jpg" alt="photo" width="100"/></td>
+        <td><img src="assets/images/tour_photo.jpg" alt="photo" width="100"/></td>
         <td>
             <input type="date" [(ngModel)]="editingTour.date" class="form-control" name="date"
              required #date="ngModel" />

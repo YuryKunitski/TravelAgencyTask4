@@ -1,0 +1,28 @@
+  .form-signin .btn {
+    font-size: 80%;
+    border-radius: 5rem;
+    letter-spacing: .1rem;
+    font-weight: bold;
+    padding: 1rem;
+    transition: all 0.2s;
+  }
+    
+  .btn-google {
+    color: white;
+    background-color: #ea4335;
+  }
+  
+  .btn-facebook {
+    color: white;
+    background-color: #3b5998;
+  }
+
+  .btn-vk {
+    color: white;
+    background-color: #092053;
+  }
+
+  button:hover {
+    background: #786b59; /* Цвет фона под ссылкой */ 
+    color: rgb(226, 226, 213); /* Цвет ссылки */ 
+   } 

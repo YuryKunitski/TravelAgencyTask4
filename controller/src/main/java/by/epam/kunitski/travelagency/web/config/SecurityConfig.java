@@ -43,12 +43,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http
+             .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/oauth/token").permitAll()
                 .antMatchers("/review/**", "/country/get_by_id", "/country/get_all",
-                        "/hotel/get_by_id", "/hotel/get_all", "/tour/get_by_id", "/tour/get_all", "/user/get_all").permitAll()
+                        "/hotel/get_by_id", "/hotel/get_all", "/tour/get_by_id", "/tour/get_all",
+                        "/user/get_all", "/login").permitAll()
+                .and()
+                .authorizeRequests().anyRequest().authenticated()
 //                .and()
-//                .authorizeRequests().anyRequest().authenticated()
-                ;
+//                .oauth2Login()
+        ;
     }
 }

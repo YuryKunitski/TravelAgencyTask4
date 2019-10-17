@@ -31,6 +31,35 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { RegistrationComponent } from './registration/registration.component';
+import { 
+  SocialLoginModule,
+   AuthServiceConfig,
+    GoogleLoginProvider,
+     FacebookLoginProvider }
+      from "angular-6-social-login";
+import { SigninComponent } from './signin/signin.component';
+import { VkontakteLoginProvider } from 'angular-6-social-login-v2';
+
+// Configs 
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider("508674179690672")
+        },
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider("136328110166-8plntk6h8v6dbs308dt7122pj3jaogdf.apps.googleusercontent.com")
+        },
+        {
+          id: VkontakteLoginProvider.PROVIDER_ID,
+          provider: new VkontakteLoginProvider("7174004")
+        },
+      ]
+  );
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -42,7 +71,8 @@ import { RegistrationComponent } from './registration/registration.component';
     TourComponent,
     LoginComponent,
     LogoutComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
@@ -61,13 +91,18 @@ import { RegistrationComponent } from './registration/registration.component';
     MatPaginatorModule,
     MatSortModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    SocialLoginModule
   ],
   providers: [
     CountryService,
     HotelService,
     TourService,
-    UserService
+    UserService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }
   ],
   bootstrap: [AppComponent]
 })

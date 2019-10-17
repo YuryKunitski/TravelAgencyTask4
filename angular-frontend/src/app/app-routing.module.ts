@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CountryComponent } from './country/country.component';
@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AuthGaurdService } from './service/auth-gaurd.service';
 import{ RegistrationComponent } from './registration/registration.component';
+import { SigninComponent } from './signin/signin.component' 
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent, canActivate:[AuthGaurdService] },
   { path: 'countries', component: CountryComponent, canActivate:[AuthGaurdService] },
   { path: 'hotels', component: HotelComponent,canActivate:[AuthGaurdService] },
+  { path: 'socialSignIn', component: SigninComponent}, 
   { path: '', component: TourComponent },
   { path: '**', redirectTo: '' }
 ];
