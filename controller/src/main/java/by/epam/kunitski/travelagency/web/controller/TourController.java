@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/tour")
 public class TourController {
-    
+
     @Autowired
     private TourService tourService;
 
